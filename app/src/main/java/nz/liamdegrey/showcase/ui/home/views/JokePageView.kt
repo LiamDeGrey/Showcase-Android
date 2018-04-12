@@ -1,8 +1,10 @@
 package nz.liamdegrey.showcase.ui.home.views
 
 import android.content.Context
+import android.os.Build
 import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewCompat
+import android.text.Html
 import android.widget.LinearLayout
 import kotlinx.android.synthetic.main.view_jokepage.view.*
 import nz.liamdegrey.showcase.R
@@ -23,7 +25,11 @@ class JokePageView private constructor(context: Context) : LinearLayout(context)
 
         fun populateView(number: Int, joke: Joke) {
             rootView.jokePage_characterImageView.updateCharacter(number)
-            rootView.jokePage_jokeView.text = joke.body
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                rootView.jokePage_jokeView.text = Html.fromHtml(joke.body, Html.FROM_HTML_MODE_COMPACT)
+            } else {
+                rootView.jokePage_jokeView.text = Html.fromHtml(joke.body)
+            }
         }
     }
 }

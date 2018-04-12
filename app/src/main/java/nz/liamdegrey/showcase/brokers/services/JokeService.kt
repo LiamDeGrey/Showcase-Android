@@ -6,15 +6,16 @@ import nz.liamdegrey.showcase.models.JokesHolder
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 
 interface JokeService {
 
     @GET("/jokes/random")
     @Headers("Accept: application/json")
-    fun getRandomJoke(): Single<JokeHolder>
+    fun getRandomJoke(@Query("exclude") exclusions: String = "[explicit]"): Single<JokeHolder>
 
     @GET("/jokes/random/{AMOUNT}")
     @Headers("Accept: application/json")
-    fun getRandomJokes(@Path("AMOUNT") amount: Int): Single<JokesHolder>
+    fun getRandomJokes(@Path("AMOUNT") amount: Int, @Query("exclude") exclusions: String = "[explicit]"): Single<JokesHolder>
 }
