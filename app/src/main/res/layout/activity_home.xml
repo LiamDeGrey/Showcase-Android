@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v4.widget.DrawerLayout android:id="@+id/home_drawerLayout"
+                                        xmlns:android="http://schemas.android.com/apk/res/android"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent">
+
+    <!-- Main view -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.indieapplications.dealsteal.ui.common.views.Toolbar style="@style/Toolbar"/>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/home_noContent"
+                    style="@style/Text.Body1.Error"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingLeft="@dimen/padding_36"
+                    android:paddingRight="@dimen/padding_36"
+                    android:paddingTop="@dimen/padding_54"
+                    android:text="@string/home_noContent"
+                    android:visibility="gone"/>
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+        <nz.liamdegrey.showcase.ui.common.views.LoadingView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </FrameLayout>
+
+    <!-- Drawer view -->
+    <nz.liamdegrey.showcase.ui.home.views.DrawerView
+        android:id="@+id/home_drawerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@color/lightGrey"/>
+
+</android.support.v4.widget.DrawerLayout>

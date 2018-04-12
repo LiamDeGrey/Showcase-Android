@@ -3,10 +3,20 @@
     <!-- Common strings -->
     <string name="app_name">Showcase</string>
 
+    <string name="developer_name">Created in full by Liam De Grey\u00A9</string>
+
     <string name="back">Back</string>
 
     <!-- Views -->
     <string name="toolbar_home_contentDescription">Home</string>
     <string name="toolbar_extra_contentDescription">Extra</string>
+
+    <!-- Home strings -->
+    <string name="home_title">Home</string>
+    <string name="home_noContent">Sorry, but we couldn\'t seem to load any great jokes for you! Come back later and try again.</string>
+
+    <!-- Drawer strings -->
+    <string name="drawer_acknowledgements">Acknowledgements</string>
+    <string name="drawer_likedTheSplashScreen">Liked the Splash?</string>
 
 </resources>

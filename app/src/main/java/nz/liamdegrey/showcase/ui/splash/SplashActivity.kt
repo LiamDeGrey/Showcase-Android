@@ -6,6 +6,7 @@ import android.view.View
 import kotlinx.android.synthetic.main.activity_splash.*
 import nz.liamdegrey.showcase.R
 import nz.liamdegrey.showcase.ui.common.BaseActivity
+import nz.liamdegrey.showcase.ui.home.HomeActivity
 
 class SplashActivity : BaseActivity<SplashPresenter, SplashViewMask>(),
         SplashViewMask {
@@ -28,7 +29,7 @@ class SplashActivity : BaseActivity<SplashPresenter, SplashViewMask>(),
     }
 
     override fun startHomeActivity() {
-//        startActivity(HomeActivity::class.java)//TODO: Create home activity
+        startActivity(HomeActivity::class.java)
     }
 
     //endregion

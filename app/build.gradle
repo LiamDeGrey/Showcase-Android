@@ -86,6 +86,9 @@ dependencies {
     implementation("com.android.support:appcompat-v7:$android_support_library_version") {
         force = true
     }
+    implementation("com.android.support:recyclerview-v7:$android_support_library_version") {
+        force = true
+    }
 
     //Circle indicator
     implementation "me.relex:circleindicator:1.2.2"
