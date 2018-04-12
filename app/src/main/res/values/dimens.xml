@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Layout dimensions -->
+    <dimen name="padding_0">0dp</dimen>
+    <dimen name="padding_4">4dp</dimen>
+    <dimen name="padding_8">8dp</dimen>
+    <dimen name="padding_12">12dp</dimen>
+    <dimen name="padding_16">16dp</dimen>
+    <dimen name="padding_20">20dp</dimen>
+    <dimen name="padding_24">24dp</dimen>
+
+    <!-- Text dimensions -->
+    <dimen name="textSize_12">12sp</dimen>
+    <dimen name="textSize_16">16sp</dimen>
+    <dimen name="textSize_20">20sp</dimen>
+    <dimen name="textSize_32">32sp</dimen>
+
+    <!-- Common dimensions -->
+    <dimen name="cornerRadius">2dp</dimen>
+    <dimen name="strokeWidth">1dp</dimen>
+    <dimen name="elevation">20dp</dimen>
+
+    <!-- Custom dimensions -->
+    <dimen name="circleIndicator_height">13dp</dimen>
+
+</resources>

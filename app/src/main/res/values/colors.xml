@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+
+    <!-- Primary palette -->
+    <color name="darkGrey">#262626</color>
+    <color name="mediumGrey">#404040</color>
+    <color name="lightGrey">#BFBFBF</color>
+    <color name="blue">#A2FDFF</color>
+
+    <!-- Secondary palette -->
+    <color name="errorRed">#BD5459</color>
+    <color name="superDarkGrey">#161616</color>
+    <color name="mediumLightGrey">#525252</color>
+    <color name="disabledGrey">#8D8D8D</color>
+    <color name="semiTransparent">#80000000</color>
+    <color name="lessTransparent">#CC000000</color>
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="transparent">#00000000</color>
+
 </resources>

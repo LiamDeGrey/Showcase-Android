@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:id="@+id/toolbar_button_home"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="?android:attr/selectableItemBackground"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/padding_12"
+        android:paddingRight="@dimen/padding_12"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/toolbar_button_home_image"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/toolbar_home_contentDescription"
+            android:paddingEnd="@dimen/padding_4"
+            android:paddingLeft="@dimen/padding_0"
+            android:paddingRight="@dimen/padding_4"
+            android:paddingStart="@dimen/padding_0"
+            android:scaleType="centerInside"/>
+
+        <TextView
+            android:id="@+id/toolbar_button_home_text"
+            style="@style/Text.Body1.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/toolbar_title"
+        style="@style/Text.Header2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"/>
+
+    <ImageButton
+        android:id="@+id/toolbar_button_extra"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:background="?android:attr/selectableItemBackground"
+        android:contentDescription="@string/toolbar_extra_contentDescription"
+        android:paddingLeft="@dimen/padding_12"
+        android:paddingRight="@dimen/padding_12"
+        android:scaleType="centerInside"
+        android:visibility="gone"/>
+
+</merge>

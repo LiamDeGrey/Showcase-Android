@@ -1,3 +1,12 @@
 <resources>
+
+    <!-- Common strings -->
     <string name="app_name">Showcase</string>
+
+    <string name="back">Back</string>
+
+    <!-- Views -->
+    <string name="toolbar_home_contentDescription">Home</string>
+    <string name="toolbar_extra_contentDescription">Extra</string>
+
 </resources>

@@ -1,32 +1,102 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
+
+def keystorePropertiesFile = rootProject.file("etc/keystore.properties")
+def keystoreProperties = new Properties()
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+}
 
 android {
     compileSdkVersion 27
+
     defaultConfig {
-        applicationId "nz.liamdegrey.showcase"
         minSdkVersion 16
         targetSdkVersion 27
+        versionName "0.1"
         versionCode 1
-        versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        vectorDrawables.useSupportLibrary = true
     }
+
+    signingConfigs {
+        devSign {
+            if (keystorePropertiesFile.exists()) {
+                storeFile file(keystoreProperties['storeFileDev'])
+                storePassword keystoreProperties['storePasswordDev']
+                keyAlias keystoreProperties['keyAliasDev']
+                keyPassword keystoreProperties['keyPasswordDev']
+            }
+        }
+        prodSign {
+            if (keystorePropertiesFile.exists()) {
+                storeFile file(keystoreProperties['storeFileRelease'])
+                storePassword keystoreProperties['storePasswordRelease']
+                keyAlias keystoreProperties['keyAliasRelease']
+                keyPassword keystoreProperties['keyPasswordRelease']
+            }
+        }
+    }
+
     buildTypes {
-        release {
+        debug {
             minifyEnabled false
+        }
+        release {
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    flavorDimensions "environment"
+
+    productFlavors {
+        def service_baseUrl_key = "SERVICE_BASEURL_KEY"
+
+        dev {
+            signingConfig signingConfigs.devSign
+            dimension "environment"
+            applicationId "nz.liamdegrey.showcase.dev"
+
+            buildConfigField("String", service_baseUrl_key, "\"http://api.icndb.com\"")
+        }
+        prod {
+            signingConfig signingConfigs.prodSign
+            dimension "environment"
+            applicationId "nz.liamdegrey.showcase"
+
+            buildConfigField("String", service_baseUrl_key, "\"http://api.icndb.com\"")
         }
     }
 }
 
+androidExtensions {
+    experimental = true // For Kotlin's @Parcelize
+}
+
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    implementation 'com.android.support:appcompat-v7:27.1.1'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    def android_support_library_version = '27.1.1'
+    def retrofit_library_version = '2.3.0'
+
+    //Kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+
+    //Android
+    implementation("com.android.support:appcompat-v7:$android_support_library_version") {
+        force = true
+    }
+
+    //Circle indicator
+    implementation "me.relex:circleindicator:1.2.2"
+
+    //Network
+    implementation "io.reactivex.rxjava2:rxjava:2.1.9"
+    implementation "io.reactivex.rxjava2:rxandroid:2.0.1"
+    implementation "io.reactivex.rxjava2:rxkotlin:2.2.0"
+
+    implementation "com.squareup.okhttp3:logging-interceptor:3.9.1"
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_library_version"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_library_version"
+    implementation "com.squareup.retrofit2:converter-jackson:$retrofit_library_version"
 }
