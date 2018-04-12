@@ -7,6 +7,7 @@ import android.content.Context
 import android.os.Build
 import android.support.annotation.RequiresApi
 import android.support.v4.content.ContextCompat
+import android.support.v4.view.ViewCompat
 import android.support.v7.widget.AppCompatImageView
 import android.util.AttributeSet
 import android.view.View
@@ -43,6 +44,8 @@ class LoadingView : FrameLayout, Animator.AnimatorListener {
         addView(loaderImage)
         visibility = View.GONE
         isClickable = true
+
+        ViewCompat.setElevation(this, resources.getDimension(R.dimen.elevation))
     }
 
     fun setLoading(loading: Boolean) {

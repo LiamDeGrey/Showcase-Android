@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <nz.liamdegrey.showcase.ui.home.views.CharacterImageView
+        android:id="@+id/jokePage_characterImageView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="@dimen/padding_54"
+        android:layout_marginRight="@dimen/padding_54"
+        android:layout_marginTop="@dimen/padding_36"
+        android:layout_weight="0.2"/>
+
+    <TextView
+        android:id="@+id/jokePage_jokeView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/padding_36"
+        android:layout_marginLeft="@dimen/padding_36"
+        android:layout_marginRight="@dimen/padding_36"
+        android:layout_marginTop="@dimen/padding_36"
+        android:layout_weight="0.8"
+        android:gravity="center_horizontal"/>
+
+</merge>

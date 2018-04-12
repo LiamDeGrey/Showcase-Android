@@ -2,46 +2,56 @@
 
 <android.support.v4.widget.DrawerLayout android:id="@+id/home_drawerLayout"
                                         xmlns:android="http://schemas.android.com/apk/res/android"
+                                        xmlns:app="http://schemas.android.com/apk/res-auto"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent">
 
     <!-- Main view -->
-    <FrameLayout
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
+        <nz.liamdegrey.showcase.ui.common.views.Toolbar
+            android:id="@id/toolbar"
+            style="@style/Toolbar"/>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/home_jokesPager"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/padding_36"
+            android:clipToPadding="false"
+            android:paddingLeft="@dimen/padding_54"
+            android:paddingRight="@dimen/padding_54"
+            app:layout_constraintBottom_toTopOf="@id/home_jokesPager_indicator"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"/>
 
-            <com.indieapplications.dealsteal.ui.common.views.Toolbar style="@style/Toolbar"/>
+        <me.relex.circleindicator.CircleIndicator
+            android:id="@+id/home_jokesPager_indicator"
+            style="@style/CircleIndicator"
+            android:layout_marginBottom="@dimen/padding_36"
+            android:layout_marginTop="@dimen/padding_36"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/home_jokesPager"/>
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:id="@+id/home_noContent"
-                    style="@style/Text.Body1.Error"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:paddingLeft="@dimen/padding_36"
-                    android:paddingRight="@dimen/padding_36"
-                    android:paddingTop="@dimen/padding_54"
-                    android:text="@string/home_noContent"
-                    android:visibility="gone"/>
-
-            </FrameLayout>
-
-        </LinearLayout>
+        <TextView
+            android:id="@+id/home_noContentView"
+            style="@style/Text.Body1.Error"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingLeft="@dimen/padding_36"
+            android:paddingRight="@dimen/padding_36"
+            android:paddingTop="@dimen/padding_54"
+            android:text="@string/home_noContent"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"/>
 
         <nz.liamdegrey.showcase.ui.common.views.LoadingView
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 
-    </FrameLayout>
+    </android.support.constraint.ConstraintLayout>
 
     <!-- Drawer view -->
     <nz.liamdegrey.showcase.ui.home.views.DrawerView

@@ -5,4 +5,4 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class JokeHolder(@JsonProperty("value") val joke: Joke) : Parcelable
+data class JokesHolder(@JsonProperty("value") val jokes: List<Joke>) : Parcelable

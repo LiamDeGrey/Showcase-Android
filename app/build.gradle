@@ -83,12 +83,9 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 
     //Android
-    implementation("com.android.support:appcompat-v7:$android_support_library_version") {
-        force = true
-    }
-    implementation("com.android.support:recyclerview-v7:$android_support_library_version") {
-        force = true
-    }
+    implementation "com.android.support:appcompat-v7:$android_support_library_version"
+    implementation "com.android.support:recyclerview-v7:$android_support_library_version"
+    implementation "com.android.support.constraint:constraint-layout:1.1.0-beta6"
 
     //Circle indicator
     implementation "me.relex:circleindicator:1.2.2"

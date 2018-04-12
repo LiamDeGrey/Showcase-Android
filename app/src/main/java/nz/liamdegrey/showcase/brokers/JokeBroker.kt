@@ -4,6 +4,7 @@ import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 import nz.liamdegrey.showcase.brokers.services.JokeService
 import nz.liamdegrey.showcase.models.JokeHolder
+import nz.liamdegrey.showcase.models.JokesHolder
 import okhttp3.OkHttpClient
 import retrofit2.Converter
 import retrofit2.Retrofit
@@ -23,4 +24,6 @@ class JokeBroker(endpoint: String, okHttpClient: OkHttpClient, converterFactory:
     }
 
     fun getRandomJoke(): Single<JokeHolder> = service.getRandomJoke()
+
+    fun getRandomJokes(amount: Int): Single<JokesHolder> = service.getRandomJokes(amount)
 }
