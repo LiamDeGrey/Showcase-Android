@@ -1,26 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?android:attr/windowBackground"
+    android:clipChildren="false"
+    android:clipToPadding="false"
     android:orientation="vertical">
 
     <nz.liamdegrey.showcase.ui.common.views.Toolbar
         android:id="@id/toolbar"
-        style="@style/Toolbar"/>
+        style="@style/Toolbar" />
 
     <ImageView
         android:id="@+id/sensor_worldView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:scaleType="matrix"
         android:scaleX="2"
         android:scaleY="2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
-        app:srcCompat="@drawable/ic_country"/>
+        app:srcCompat="@drawable/ic_country" />
 
 </android.support.constraint.ConstraintLayout>

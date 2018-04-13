@@ -6,29 +6,36 @@ import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_sensor.*
 import nz.liamdegrey.showcase.R
 import nz.liamdegrey.showcase.ui.common.BaseFragment
 import nz.liamdegrey.showcase.ui.common.views.Toolbar
+import java.util.*
 
 class SensorFragment : BaseFragment<SensorPresenter, SensorViewMask>(),
         SensorViewMask, SensorEventListener {
     private val sensorManager by lazy { activity!!.getSystemService(Context.SENSOR_SERVICE) as SensorManager }
-    private val sensor by lazy { sensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION) }
+    private val sensor by lazy { sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE) }
+
+    private val sensorValues by lazy { LinkedList<FloatArray>() }
 
     override val layoutResId: Int
         get() = R.layout.fragment_sensor
 
 
     override fun viewCreated(view: View, savedInstanceState: Bundle?) {
+    }
+
+    override fun onResume() {
+        super.onResume()
+
         sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_FASTEST)
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onPause() {
+        super.onPause()
 
         sensorManager.unregisterListener(this)
     }
@@ -48,36 +55,43 @@ class SensorFragment : BaseFragment<SensorPresenter, SensorViewMask>(),
     }
 
     override fun onSensorChanged(event: SensorEvent) {
-        Log.v("debug", "CHANGED")
         view?.run {
-            val dx = event.values[0]
-            val dy = event.values[1]
+            sensorValues.offer(floatArrayOf(event.values[0], event.values[1]))
 
-            val potentialX = dx + sensor_worldView.x
-            val potentialY = dy + sensor_worldView.y
-
-            val newDx = when {
-                potentialX > width -> width - sensor_worldView.x
-                potentialX < 0 -> 0f
-                else -> dx
+            while (sensorValues.count() > MAX_STORED_VALUES) {
+                sensorValues.poll()
             }
 
-            val newDy = when {
-                potentialY > height -> height - sensor_worldView.y
-                potentialY < 0 -> 0f
-                else -> dy
+            var dx = 0f
+            var dy = 0f
+
+            sensorValues.forEach {
+                dx += it[0]
+                dy += it[1]
             }
 
-            Log.v("debug", "SETUP")
+            dx /= sensorValues.count()
+            dy /= sensorValues.count()
 
-            val matrix = sensor_worldView.imageMatrix
-            matrix.postTranslate(newDx, newDy)
-            sensor_worldView.imageMatrix = matrix
+            dx *= SENSOR_VALUE_MULTIPLIER
+            dy *= SENSOR_VALUE_MULTIPLIER
+
+            val currentTranslationValues = FloatArray(9)
+            sensor_worldView.imageMatrix.getValues(currentTranslationValues)
+
+            sensor_worldView.imageMatrix = sensor_worldView.imageMatrix.apply {
+                postTranslate(dx, dy)
+            }
             sensor_worldView.invalidate()
         }
     }
 
     //endregion
+
+    companion object {
+        private const val SENSOR_VALUE_MULTIPLIER = 5f
+        private const val MAX_STORED_VALUES = 25
+    }
 
     //region: ViewMask methods
 

@@ -15,7 +15,7 @@ class HomePresenter : BasePresenter<HomeViewMask>() {
 
 
     override fun onViewAttached() {
-        setLoading(true)
+//        setLoading(true)
 
         subscribe(jokesBroker.getRandomJokes((Math.random() * 15 + 5).toInt())//between 5 and 20
                 .subscribeOn(Schedulers.io())
