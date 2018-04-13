@@ -5,6 +5,7 @@ import io.reactivex.schedulers.Schedulers
 import nz.liamdegrey.showcase.Application
 import nz.liamdegrey.showcase.models.Joke
 import nz.liamdegrey.showcase.ui.common.BasePresenter
+import nz.liamdegrey.showcase.ui.home.search.SearchFragment
 
 class HomePresenter : BasePresenter<HomeViewMask>() {
     private val jokesBroker by lazy { Application.instance.jokeBroker }
@@ -13,7 +14,7 @@ class HomePresenter : BasePresenter<HomeViewMask>() {
     override fun onViewAttached() {
         setLoading(true)
 
-        subscribe(jokesBroker.getRandomJokes((Math.random() * 19 + 1).toInt())//between 1 and 20
+        subscribe(jokesBroker.getRandomJokes((Math.random() * 15 + 5).toInt())//between 5 and 20
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doFinally { setLoading(false) }
@@ -22,7 +23,7 @@ class HomePresenter : BasePresenter<HomeViewMask>() {
                         showNoContentView(true)
                     } ?: run {
                         showNoContentView(false)
-                        populateJokes(jokesHolder.jokes)
+                        populateJokes(jokesHolder.jokes.shuffled())
                     }
                 })
     }
@@ -33,7 +34,7 @@ class HomePresenter : BasePresenter<HomeViewMask>() {
     //region: Presenter methods
 
     fun onExtraClicked() {
-
+        showFragment(SearchFragment())
     }
 
     fun onAcknowledgementsClicked() {

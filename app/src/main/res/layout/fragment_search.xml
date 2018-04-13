@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:attr/windowBackground">
+
+    <nz.liamdegrey.showcase.ui.common.views.Toolbar
+        android:id="@id/toolbar"
+        style="@style/Toolbar"/>
+
+    <EditText
+        android:id="@+id/search_termInput"
+        style="@style/EditText"
+        android:layout_marginBottom="@dimen/padding_16"
+        android:layout_marginLeft="@dimen/padding_8"
+        android:layout_marginRight="@dimen/padding_8"
+        android:layout_marginTop="@dimen/padding_16"
+        android:drawableLeft="@drawable/ic_search"
+        android:drawableStart="@drawable/ic_search"
+        android:hint="@string/search_hint"
+        android:inputType="text"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"/>
+
+    <TextView
+        android:id="@+id/search_noContent"
+        style="@style/Text.Body1.Error"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingLeft="@dimen/padding_36"
+        android:paddingRight="@dimen/padding_36"
+        android:paddingTop="@dimen/padding_54"
+        android:text="@string/search_noContent"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/search_termInput"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/search_jokesList"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingTop="@dimen/padding_20"
+        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+        app:layout_constraintTop_toBottomOf="@id/search_termInput"/>
+
+</android.support.constraint.ConstraintLayout>

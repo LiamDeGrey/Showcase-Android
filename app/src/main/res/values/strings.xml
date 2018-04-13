@@ -19,4 +19,9 @@
     <string name="drawer_acknowledgements">Acknowledgements</string>
     <string name="drawer_likedTheSplashScreen">Liked the Splash?</string>
 
+    <!-- Search strings -->
+    <string name="search_title">Search</string>
+    <string name="search_hint">Enter search term</string>
+    <string name="search_noContent">Sorry, but we couldn\'t seem to find any great jokes that fit that term! Try search for something else or come back later and try again.</string>
+
 </resources>

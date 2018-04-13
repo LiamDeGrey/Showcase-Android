@@ -1,4 +1,4 @@
-package nz.liamdegrey.showcase.ui.home.views
+package nz.liamdegrey.showcase.ui.home.search.views
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
@@ -12,15 +12,15 @@ class JokeView private constructor(context: Context) : LinearLayout(context) {
 
     init {
         orientation = HORIZONTAL
-        layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+        layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
 
         inflate(context, R.layout.view_joke, this)
     }
 
-    class JokeViewHolder(context: Context) : RecyclerView.ViewHolder(JokeView(context)) {
+    class Holder(context: Context) : RecyclerView.ViewHolder(JokeView(context)) {
 
         fun populateView(number: Int, joke: Joke) {
-            view.joke_numberView.updateCharacter(number.toChar())
+            view.joke_numberView.updateCharacter(number)
             view.joke_titleView.text = joke.body
         }
 

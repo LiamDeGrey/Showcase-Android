@@ -59,14 +59,14 @@ android {
             dimension "environment"
             applicationId "nz.liamdegrey.showcase.dev"
 
-            buildConfigField("String", service_baseUrl_key, "\"http://api.icndb.com\"")
+            buildConfigField("String", service_baseUrl_key, "\"https://icanhazdadjoke.com/\"")
         }
         prod {
             signingConfig signingConfigs.prodSign
             dimension "environment"
             applicationId "nz.liamdegrey.showcase"
 
-            buildConfigField("String", service_baseUrl_key, "\"http://api.icndb.com\"")
+            buildConfigField("String", service_baseUrl_key, "\"https://icanhazdadjoke.com/\"")
         }
     }
 }
@@ -94,6 +94,7 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxjava:2.1.9"
     implementation "io.reactivex.rxjava2:rxandroid:2.0.1"
     implementation "io.reactivex.rxjava2:rxkotlin:2.2.0"
+    implementation 'com.jakewharton.rxbinding2:rxbinding:2.1.1'
 
     implementation "com.squareup.okhttp3:logging-interceptor:3.9.1"
     implementation "com.squareup.retrofit2:retrofit:$retrofit_library_version"

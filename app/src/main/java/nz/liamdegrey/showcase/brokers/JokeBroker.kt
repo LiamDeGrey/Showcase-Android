@@ -3,7 +3,6 @@ package nz.liamdegrey.showcase.brokers
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 import nz.liamdegrey.showcase.brokers.services.JokeService
-import nz.liamdegrey.showcase.models.JokeHolder
 import nz.liamdegrey.showcase.models.JokesHolder
 import okhttp3.OkHttpClient
 import retrofit2.Converter
@@ -23,7 +22,7 @@ class JokeBroker(endpoint: String, okHttpClient: OkHttpClient, converterFactory:
         service = retrofit.create(JokeService::class.java)
     }
 
-    fun getRandomJoke(): Single<JokeHolder> = service.getRandomJoke()
-
     fun getRandomJokes(amount: Int): Single<JokesHolder> = service.getRandomJokes(amount)
+
+    fun searchForJokes(searchTerm: String): Single<JokesHolder> = service.searchForJokes(searchTerm)
 }

@@ -84,10 +84,11 @@ class CharacterImageView : ImageView {
 
     private fun setupAttributes(attrs: AttributeSet, defStyleAttr: Int = 0, defStyleRes: Int = 0) {
         val attributes = context.theme.obtainStyledAttributes(attrs, R.styleable.CharacterImageView, defStyleAttr, defStyleRes)
-        val character = try {
-            attributes.getString(R.styleable.CharacterImageView_character)
-        } catch (exception: Exception) {
-            null
+        val character: String?
+        val characterSize: Int?
+        try {
+            character = attributes.getString(R.styleable.CharacterImageView_character)
+            characterSize = attributes.getDimensionPixelSize(R.styleable.CharacterImageView_characterSize, -1)
         } finally {
             attributes.recycle()
         }
@@ -95,6 +96,12 @@ class CharacterImageView : ImageView {
         character?.let {
             updateCharacter(it)
         }
+
+        characterSize?.takeIf { it != -1 }
+                ?.let {
+                    textPaintSolid.textSize = it.toFloat()
+                    textPaintStroke.textSize = it.toFloat()
+                }
     }
 
     override fun onDraw(canvas: Canvas) {

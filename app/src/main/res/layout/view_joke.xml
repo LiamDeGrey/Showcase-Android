@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<merge xmlns:android="http://schemas.android.com/apk/res/android">
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+       xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <nz.liamdegrey.showcase.ui.home.views.CharacterImageView
         android:id="@+id/joke_numberView"
@@ -8,7 +9,8 @@
         android:layout_height="match_parent"
         android:layout_marginLeft="@dimen/padding_8"
         android:layout_marginStart="@dimen/padding_8"
-        android:layout_weight="0.1"/>
+        android:layout_weight="0.1"
+        app:characterSize="@dimen/textSize_20"/>
 
     <TextView
         android:id="@+id/joke_titleView"
