@@ -5,6 +5,7 @@ import android.support.v4.content.ContextCompat
 import android.support.v4.widget.DrawerLayout
 import android.view.Gravity
 import android.view.View
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_home.*
 import nz.liamdegrey.showcase.R
 import nz.liamdegrey.showcase.models.Joke
@@ -94,6 +95,10 @@ class HomeActivity : BaseActivity<HomePresenter, HomeViewMask>(),
     //endregion
 
     //region: ViewMask methods
+
+    override fun showWelcomeMessage() {
+        Toast.makeText(this, R.string.home_welcomeMessage, Toast.LENGTH_LONG).show()
+    }
 
     override fun showNoContentView(show: Boolean) {
         home_noContentView.visibility = if (show) View.VISIBLE else View.GONE

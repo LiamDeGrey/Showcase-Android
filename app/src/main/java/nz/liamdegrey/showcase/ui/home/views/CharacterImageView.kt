@@ -4,17 +4,15 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.Typeface
-import android.os.Build
-import android.support.annotation.RequiresApi
 import android.support.v4.content.ContextCompat
 import android.support.v4.content.res.ResourcesCompat
+import android.support.v7.widget.AppCompatImageView
 import android.text.TextPaint
 import android.util.AttributeSet
-import android.widget.ImageView
 import nz.liamdegrey.showcase.R
 import kotlin.properties.Delegates
 
-class CharacterImageView : ImageView {
+class CharacterImageView : AppCompatImageView {
     private val textPaintSolid: TextPaint
     private val textPaintStroke: TextPaint
 
@@ -30,11 +28,6 @@ class CharacterImageView : ImageView {
 
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
         setupAttributes(attrs, defStyleAttr)
-    }
-
-    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int, defStyleRes: Int) : super(context, attrs, defStyleAttr, defStyleRes) {
-        setupAttributes(attrs, defStyleAttr, defStyleRes)
     }
 
     init {

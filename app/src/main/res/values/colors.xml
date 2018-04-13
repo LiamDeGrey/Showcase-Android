@@ -13,9 +13,7 @@
     <color name="mediumLightGrey">#525252</color>
     <color name="disabledGrey">#8D8D8D</color>
     <color name="semiTransparent">#80000000</color>
-    <color name="lessTransparent">#CC000000</color>
     <color name="black">#000000</color>
-    <color name="white">#FFFFFF</color>
     <color name="transparent">#00000000</color>
 
 </resources>

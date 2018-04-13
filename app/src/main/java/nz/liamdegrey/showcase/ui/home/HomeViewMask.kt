@@ -5,6 +5,8 @@ import nz.liamdegrey.showcase.ui.common.BaseViewMask
 
 interface HomeViewMask : BaseViewMask {
 
+    fun showWelcomeMessage()
+
     fun showNoContentView(show: Boolean)
 
     fun populateJokes(jokes: List<Joke>)

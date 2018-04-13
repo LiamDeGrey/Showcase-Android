@@ -11,6 +11,7 @@ import nz.liamdegrey.showcase.ui.home.search.SearchFragment
 
 class HomePresenter : BasePresenter<HomeViewMask>() {
     private val jokesBroker by lazy { Application.instance.jokeBroker }
+    private val preferences by lazy { Application.instance.preferences }
 
 
     override fun onViewAttached() {
@@ -28,6 +29,11 @@ class HomePresenter : BasePresenter<HomeViewMask>() {
                         populateJokes(jokesHolder.jokes.shuffled())
                     }
                 })
+
+        if (!preferences.hasViewedHomeActivity) {
+            showWelcomeMessage()
+            preferences.hasViewedHomeActivity = true
+        }
     }
 
     override fun onViewDetached() {
@@ -58,6 +64,10 @@ class HomePresenter : BasePresenter<HomeViewMask>() {
     //endregion
 
     //region: ViewMask methods
+
+    private fun showWelcomeMessage() {
+        getViewMask()?.showWelcomeMessage()
+    }
 
     private fun showNoContentView(show: Boolean) {
         getViewMask()?.showNoContentView(show)

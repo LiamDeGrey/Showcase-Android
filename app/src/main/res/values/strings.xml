@@ -14,6 +14,7 @@
     <!-- Home strings -->
     <string name="home_title">Home</string>
     <string name="home_noContent">Sorry, but we couldn\'t seem to load any great jokes for you! Come back later and try again.</string>
+    <string name="home_welcomeMessage">Welcome to the Joke center!</string>
 
     <!-- Drawer strings -->
     <string name="drawer_about">About</string>
@@ -23,10 +24,6 @@
     <!-- About strings -->
     <string name="about_title">About</string>
     <string name="about_body">Showcase-Android is an incredibly simple sample of how I make Android applications.\nOn inspection of the source code you\'ll notice the project is completely based on Kotlin, and uses RxJava where observers are required (Network requests, EditText updates etc.). I use SVG drawables to replace the <i>beefier</i> PNG files. This reduces the APK size greatly, however, PNG files are still generated when using Android versions prior to API 21.\nI plan on updating this application regularly to ensure it keeps up-to-date with the latest trends and technologies.\n\nCheck back later to see how it develops!</string>
-
-    <!-- Sensor strings -->
-    <string name="sensor_title">Sensor</string>
-    <string name="sensor_instructions">Try tilting your phone to move the globe around the screen!</string>
 
     <!-- Acknowledgements strings -->
     <string name="acknowledgements_title">Acknowledgements</string>
