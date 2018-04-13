@@ -19,6 +19,9 @@
     <string name="drawer_acknowledgements">Acknowledgements</string>
     <string name="drawer_likedTheSplashScreen">Liked the Splash?</string>
 
+    <!-- Acknowledgements strings -->
+    <string name="acknowledgements_title">Acknowledgements</string>
+
     <!-- Search strings -->
     <string name="search_title">Search</string>
     <string name="search_hint">Enter search term</string>
