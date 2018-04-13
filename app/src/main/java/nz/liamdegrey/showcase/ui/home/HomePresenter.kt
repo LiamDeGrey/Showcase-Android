@@ -8,6 +8,7 @@ import nz.liamdegrey.showcase.ui.common.BasePresenter
 import nz.liamdegrey.showcase.ui.home.about.AboutFragment
 import nz.liamdegrey.showcase.ui.home.acknowledgements.AcknowledgementsFragment
 import nz.liamdegrey.showcase.ui.home.search.SearchFragment
+import nz.liamdegrey.showcase.ui.home.sensor.SensorFragment
 
 class HomePresenter : BasePresenter<HomeViewMask>() {
     private val jokesBroker by lazy { Application.instance.jokeBroker }
@@ -41,6 +42,10 @@ class HomePresenter : BasePresenter<HomeViewMask>() {
 
     fun onAboutClicked() {
         showFragment(AboutFragment())
+    }
+
+    fun onSensorClicked() {
+        showFragment(SensorFragment())
     }
 
     fun onAcknowledgementsClicked() {

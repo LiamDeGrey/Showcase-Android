@@ -1,5 +1,6 @@
 package nz.liamdegrey.showcase
 
+import android.preference.PreferenceManager
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.module.SimpleModule
@@ -13,6 +14,8 @@ import android.app.Application as BaseApplication
 
 class Application : BaseApplication() {
     val jokeBroker by lazy { JokeBroker(BuildConfig.SERVICE_BASEURL_KEY, okHttpClient, jsonConverterFactory) }
+
+    val preferences by lazy { Preferences(PreferenceManager.getDefaultSharedPreferences(this)) }
 
     private val okHttpClient by lazy { createOkHttpClient() }
     private val jsonConverterFactory by lazy { createJsonConverterFactory() }
