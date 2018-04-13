@@ -4,19 +4,14 @@ import android.support.v4.view.PagerAdapter
 import android.support.v4.view.ViewPager
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AccelerateDecelerateInterpolator
 import nz.liamdegrey.showcase.models.Joke
 import nz.liamdegrey.showcase.ui.home.views.JokePageView
+import kotlin.math.absoluteValue
+import kotlin.math.min
 
-class JokesPagerAdapter(private val pager: ViewPager) : PagerAdapter(),
+class JokesPagerAdapter : PagerAdapter(),
         ViewPager.PageTransformer {
     private val jokes = ArrayList<Joke>()
-
-    private val transformationInterpolator = AccelerateDecelerateInterpolator()
-    private val pagerWidth: Int
-        get() = pager.width
-    private val pagerMargin: Int
-        get() = pager.pageMargin
 
     fun populateJokes(jokes: List<Joke>) {
         this.jokes.clear()
@@ -33,6 +28,7 @@ class JokesPagerAdapter(private val pager: ViewPager) : PagerAdapter(),
         val joke = jokes[itemPosition]
 
         viewHolder.populateView(itemPosition, joke)
+
         container.addView(viewHolder.rootView)
 
         return viewHolder
@@ -43,19 +39,20 @@ class JokesPagerAdapter(private val pager: ViewPager) : PagerAdapter(),
     }
 
     override fun transformPage(view: View, scrollPosition: Float) {
-        val pagePadding = (pagerWidth - view.width) / 2
-        val pagePaddingRatio = pagePadding / pagerWidth
-        val pagePosition = scrollPosition - pagePaddingRatio
-        val pageScale = Math.max(0f, 1 - Math.abs(pagePosition))
+        val scrollRatio = 1f - min(scrollPosition.absoluteValue, 1f)
 
-        val pageInterpolatedScale = transformationInterpolator.getInterpolation(pageScale)
-        val pageScaleFactor = 0.90f + 0.10f * pageInterpolatedScale
+        val pageScale = MINIMUM_SCALE_FACTOR + INTERPOLATED_SCALE_FACTOR * scrollRatio
+        view.scaleX = pageScale
+        view.scaleY = pageScale
 
-        val pageInterpolatedTranslation = transformationInterpolator.getInterpolation(1f - pageScale)
-        val pageTranslation = if (pagePosition < 0) pagerMargin / 2 * pageInterpolatedTranslation else -pagerMargin / 2 * pageInterpolatedTranslation
+        val pageAlpha = MINIMUM_ALPHA_FACTOR + INTERPOLATED_ALPHA_FACTOR * scrollRatio
+        view.alpha = pageAlpha
+    }
 
-        view.scaleX = pageScaleFactor
-        view.scaleY = pageScaleFactor
-        view.translationX = pageTranslation
+    companion object {
+        private const val MINIMUM_SCALE_FACTOR = 0.9f
+        private const val INTERPOLATED_SCALE_FACTOR = 1f - MINIMUM_SCALE_FACTOR
+        private const val MINIMUM_ALPHA_FACTOR = 0.5f
+        private const val INTERPOLATED_ALPHA_FACTOR = 1f - MINIMUM_ALPHA_FACTOR
     }
 }

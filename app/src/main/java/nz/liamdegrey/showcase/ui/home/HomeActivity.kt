@@ -16,7 +16,7 @@ import nz.liamdegrey.showcase.ui.splash.SplashActivity
 
 class HomeActivity : BaseActivity<HomePresenter, HomeViewMask>(),
         HomeViewMask, DrawerView.Callbacks {
-    private val jokesPagerAdapter by lazy { JokesPagerAdapter(home_jokesPager) }
+    private val jokesPagerAdapter by lazy { JokesPagerAdapter() }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,8 +27,8 @@ class HomeActivity : BaseActivity<HomePresenter, HomeViewMask>(),
         home_drawerLayout.setScrimColor(ContextCompat.getColor(this, R.color.semiTransparent))
         home_drawerView.callbacks = this
 
-        home_jokesPager.pageMargin = resources.getDimensionPixelSize(R.dimen.padding_20)
-        home_jokesPager.setPageTransformer(true, jokesPagerAdapter, View.LAYER_TYPE_HARDWARE)
+        home_jokesPager.pageMargin = resources.getDimensionPixelSize(R.dimen.padding_16)
+        home_jokesPager.setPageTransformer(false, jokesPagerAdapter, View.LAYER_TYPE_HARDWARE)
         home_jokesPager.adapter = jokesPagerAdapter
     }
 
@@ -102,6 +102,9 @@ class HomeActivity : BaseActivity<HomePresenter, HomeViewMask>(),
     override fun populateJokes(jokes: List<Joke>) {
         jokesPagerAdapter.populateJokes(jokes)
         home_jokesPager_indicator.setViewPager(home_jokesPager)
+        home_jokesPager.offscreenPageLimit = jokesPagerAdapter.count - 1
+        home_jokesPager.setCurrentItem(jokes.lastIndex, false)
+        home_jokesPager.setCurrentItem(0, true)
     }
 
     override fun goToSplashActivity() {
