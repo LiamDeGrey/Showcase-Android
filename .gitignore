@@ -15,6 +15,7 @@
 bin/
 gen/
 build/
+app/build/
 captures/
 etc/doc/
 
@@ -22,7 +23,6 @@ etc/doc/
 local.properties
 
 # intelliJ / gradle
-.gradle
 .idea/*
 *.iml
 
