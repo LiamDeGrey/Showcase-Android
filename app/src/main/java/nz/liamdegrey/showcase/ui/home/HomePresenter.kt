@@ -5,6 +5,7 @@ import io.reactivex.schedulers.Schedulers
 import nz.liamdegrey.showcase.Application
 import nz.liamdegrey.showcase.models.Joke
 import nz.liamdegrey.showcase.ui.common.BasePresenter
+import nz.liamdegrey.showcase.ui.home.about.AboutFragment
 import nz.liamdegrey.showcase.ui.home.acknowledgements.AcknowledgementsFragment
 import nz.liamdegrey.showcase.ui.home.search.SearchFragment
 
@@ -36,6 +37,10 @@ class HomePresenter : BasePresenter<HomeViewMask>() {
 
     fun onExtraClicked() {
         showFragment(SearchFragment())
+    }
+
+    fun onAboutClicked() {
+        showFragment(AboutFragment())
     }
 
     fun onAcknowledgementsClicked() {

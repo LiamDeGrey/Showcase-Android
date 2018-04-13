@@ -13,6 +13,17 @@
         android:paddingRight="@dimen/padding_36">
 
         <TextView
+            android:id="@+id/drawer_aboutBtn"
+            style="@style/Text.Body1.Pressable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:padding="@dimen/padding_12"
+            android:text="@string/drawer_about"/>
+
+        <View style="@style/Divider.Horizontal.Colored"/>
+
+        <TextView
             android:id="@+id/drawer_acknowledgementsBtn"
             style="@style/Text.Body1.Pressable"
             android:layout_width="match_parent"

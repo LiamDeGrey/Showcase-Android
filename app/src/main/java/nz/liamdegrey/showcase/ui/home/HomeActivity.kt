@@ -71,6 +71,10 @@ class HomeActivity : BaseActivity<HomePresenter, HomeViewMask>(),
 
     //region: Drawer methods
 
+    override fun onAboutClicked() {
+        presenter?.onAboutClicked()
+    }
+
     override fun onAcknowledgementsClicked() {
         presenter?.onAcknowledgementsClicked()
     }
