@@ -13,8 +13,6 @@ class DrawerView : RelativeLayout, View.OnClickListener {
 
         fun onAboutClicked()
 
-        fun onSensorClicked()
-
         fun onAcknowledgementsClicked()
 
         fun onLikedTheSplashClicked()
@@ -34,7 +32,6 @@ class DrawerView : RelativeLayout, View.OnClickListener {
         setBackgroundColor(ContextCompat.getColor(context, R.color.darkGrey))
 
         drawer_aboutBtn.setOnClickListener(this)
-        drawer_sensorBtn.setOnClickListener(this)
         drawer_acknowledgementsBtn.setOnClickListener(this)
         drawer_likedTheSplashBtn.setOnClickListener(this)
 
@@ -44,7 +41,6 @@ class DrawerView : RelativeLayout, View.OnClickListener {
     override fun onClick(v: View) {
         when (v.id) {
             R.id.drawer_aboutBtn -> callbacks.onAboutClicked()
-            R.id.drawer_sensorBtn -> callbacks.onSensorClicked()
             R.id.drawer_acknowledgementsBtn -> callbacks.onAcknowledgementsClicked()
             R.id.drawer_likedTheSplashBtn -> callbacks.onLikedTheSplashClicked()
         }

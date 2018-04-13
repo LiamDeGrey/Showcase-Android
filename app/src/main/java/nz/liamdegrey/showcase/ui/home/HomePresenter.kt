@@ -8,14 +8,13 @@ import nz.liamdegrey.showcase.ui.common.BasePresenter
 import nz.liamdegrey.showcase.ui.home.about.AboutFragment
 import nz.liamdegrey.showcase.ui.home.acknowledgements.AcknowledgementsFragment
 import nz.liamdegrey.showcase.ui.home.search.SearchFragment
-import nz.liamdegrey.showcase.ui.home.sensor.SensorFragment
 
 class HomePresenter : BasePresenter<HomeViewMask>() {
     private val jokesBroker by lazy { Application.instance.jokeBroker }
 
 
     override fun onViewAttached() {
-//        setLoading(true)
+        setLoading(true)
 
         subscribe(jokesBroker.getRandomJokes((Math.random() * 15 + 5).toInt())//between 5 and 20
                 .subscribeOn(Schedulers.io())
@@ -42,10 +41,6 @@ class HomePresenter : BasePresenter<HomeViewMask>() {
 
     fun onAboutClicked() {
         showFragment(AboutFragment())
-    }
-
-    fun onSensorClicked() {
-        showFragment(SensorFragment())
     }
 
     fun onAcknowledgementsClicked() {

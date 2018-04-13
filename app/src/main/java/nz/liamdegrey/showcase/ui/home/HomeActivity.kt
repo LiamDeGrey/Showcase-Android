@@ -75,10 +75,6 @@ class HomeActivity : BaseActivity<HomePresenter, HomeViewMask>(),
         presenter?.onAboutClicked()
     }
 
-    override fun onSensorClicked() {
-        presenter?.onSensorClicked()
-    }
-
     override fun onAcknowledgementsClicked() {
         presenter?.onAcknowledgementsClicked()
     }
