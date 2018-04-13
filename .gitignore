@@ -23,6 +23,7 @@ etc/doc/
 local.properties
 
 # intelliJ / gradle
+.gradle
 .idea/*
 *.iml
 
