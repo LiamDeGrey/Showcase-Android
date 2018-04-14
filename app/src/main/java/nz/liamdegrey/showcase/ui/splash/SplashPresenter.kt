@@ -42,9 +42,9 @@ class SplashPresenter(animationText: CharSequence) : BasePresenter<SplashViewMas
                     animationText.forEachIndexed { index, character ->
                         character.takeUnless { it.isWhitespace() }
                                 .run {
-                                    val blurSpan = BlurSpan(100f)
-                                    val translationYSpan = TranslationYSpan(-100f)
-                                    val alphaSpan = AlphaSpan(0f)
+                                    val blurSpan = BlurSpan(BLUR_RADIUS_OFFSET)
+                                    val translationYSpan = TranslationYSpan(-TRANSLATION_Y_OFFSET)
+                                    val alphaSpan = AlphaSpan(ALPHA_OFFSET)
 
                                     val textAnimatorSet = AnimatorSet()
 
@@ -52,9 +52,9 @@ class SplashPresenter(animationText: CharSequence) : BasePresenter<SplashViewMas
                                     animationText.setSpan(translationYSpan, index, index + 1, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
                                     animationText.setSpan(alphaSpan, index, index + 1, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
 
-                                    val blurAnimation = ObjectAnimator.ofFloat(blurSpan, BlurSpan.BLUR_RADIUS, 0.1f).apply { addUpdateListener(updateListener) }
-                                    val translationYAnimation = ObjectAnimator.ofFloat(translationYSpan, TranslationYSpan.TRANSLATION_Y, 0f).apply { addUpdateListener(updateListener) }
-                                    val alphaAnimation = ObjectAnimator.ofFloat(alphaSpan, AlphaSpan.ALPHA, 1f).apply { addUpdateListener(updateListener) }
+                                    val blurAnimation = ObjectAnimator.ofFloat(blurSpan, BlurSpan.BLUR_RADIUS, BLUR_RADIUS_STANDARD).apply { addUpdateListener(updateListener) }
+                                    val translationYAnimation = ObjectAnimator.ofFloat(translationYSpan, TranslationYSpan.TRANSLATION_Y, TRANSLATION_Y_STANDARD).apply { addUpdateListener(updateListener) }
+                                    val alphaAnimation = ObjectAnimator.ofFloat(alphaSpan, AlphaSpan.ALPHA, ALPHA_STANDARD).apply { addUpdateListener(updateListener) }
 
                                     textAnimatorSet.playTogether(blurAnimation, translationYAnimation, alphaAnimation)
                                     textAnimatorSet.interpolator = DecelerateInterpolator()
@@ -74,9 +74,9 @@ class SplashPresenter(animationText: CharSequence) : BasePresenter<SplashViewMas
                     animationText.forEachIndexed { index, character ->
                         character.takeUnless { it.isWhitespace() }
                                 .run {
-                                    val blurSpan = BlurSpan(0.1f)
-                                    val translationYSpan = TranslationYSpan(0f)
-                                    val alphaSpan = AlphaSpan(1f)
+                                    val blurSpan = BlurSpan(BLUR_RADIUS_STANDARD)
+                                    val translationYSpan = TranslationYSpan(TRANSLATION_Y_STANDARD)
+                                    val alphaSpan = AlphaSpan(ALPHA_STANDARD)
 
                                     val textAnimatorSet = AnimatorSet()
 
@@ -87,9 +87,9 @@ class SplashPresenter(animationText: CharSequence) : BasePresenter<SplashViewMas
                                     animationText.setSpan(translationYSpan, startIndex, endIndex, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
                                     animationText.setSpan(alphaSpan, startIndex, endIndex, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
 
-                                    val blurAnimation = ObjectAnimator.ofFloat(blurSpan, BlurSpan.BLUR_RADIUS, 100f).apply { addUpdateListener(updateListener) }
-                                    val translationYAnimation = ObjectAnimator.ofFloat(translationYSpan, TranslationYSpan.TRANSLATION_Y, 100f).apply { addUpdateListener(updateListener) }
-                                    val alphaAnimation = ObjectAnimator.ofFloat(alphaSpan, AlphaSpan.ALPHA, 0f).apply { addUpdateListener(updateListener) }
+                                    val blurAnimation = ObjectAnimator.ofFloat(blurSpan, BlurSpan.BLUR_RADIUS, BLUR_RADIUS_OFFSET).apply { addUpdateListener(updateListener) }
+                                    val translationYAnimation = ObjectAnimator.ofFloat(translationYSpan, TranslationYSpan.TRANSLATION_Y, TRANSLATION_Y_OFFSET).apply { addUpdateListener(updateListener) }
+                                    val alphaAnimation = ObjectAnimator.ofFloat(alphaSpan, AlphaSpan.ALPHA, ALPHA_OFFSET).apply { addUpdateListener(updateListener) }
 
                                     textAnimatorSet.playTogether(blurAnimation, translationYAnimation, alphaAnimation)
                                     textAnimatorSet.interpolator = AccelerateInterpolator()
@@ -112,7 +112,7 @@ class SplashPresenter(animationText: CharSequence) : BasePresenter<SplashViewMas
             addListener(object : BasicAnimatorListener() {
                 override fun onAnimationEnd(animation: Animator?) {
                     createAnimateOutAnimator().apply {
-                        startDelay = 500
+                        startDelay = ANIMATE_OUT_DELAY
                         start()
                     }
                 }
@@ -135,7 +135,15 @@ class SplashPresenter(animationText: CharSequence) : BasePresenter<SplashViewMas
     //endregion
 
     companion object {
-        private const val LETTER_ANIMATION_DURATION: Long = 200
-        private const val SUBSEQUENT_LETTER_ANIMATION_DELAY: Long = (LETTER_ANIMATION_DURATION * 0.75).toLong()
+        private const val LETTER_ANIMATION_DURATION = 200L
+        private const val SUBSEQUENT_LETTER_ANIMATION_DELAY = (LETTER_ANIMATION_DURATION * 0.75).toLong()
+        private const val ANIMATE_OUT_DELAY = 500L
+
+        private const val BLUR_RADIUS_STANDARD = 0.1f
+        private const val BLUR_RADIUS_OFFSET = 100f
+        private const val TRANSLATION_Y_STANDARD = 0f
+        private const val TRANSLATION_Y_OFFSET = 100f
+        private const val ALPHA_OFFSET = 0f
+        private const val ALPHA_STANDARD = 1f
     }
 }
