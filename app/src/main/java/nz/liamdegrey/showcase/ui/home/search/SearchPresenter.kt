@@ -25,6 +25,7 @@ class SearchPresenter : BasePresenter<SearchViewMask>() {
     fun setupTextWatcher(textInput: EditText) {
         val textWatcher = RxTextView.textChanges(textInput)
                 .debounce(500, TimeUnit.MILLISECONDS)
+                .distinctUntilChanged()
                 .map({ input -> input.toString() })
 
         subscribe(textWatcher
