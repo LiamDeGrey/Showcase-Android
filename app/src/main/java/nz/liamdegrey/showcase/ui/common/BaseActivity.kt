@@ -128,7 +128,7 @@ abstract class BaseActivity<Presenter : BasePresenter<ViewMask>, ViewMask : Base
     override fun setLoading(loading: Boolean) {
         findViewById<LoadingView>(R.id.loadingView)?.let { loadingView ->
             isLoading = loading
-            loadingView.setLoading(loading)
+            loadingView.loading = loading
         }
     }
 

@@ -12,12 +12,10 @@ android {
     compileSdkVersion 27
 
     defaultConfig {
-        minSdkVersion 16
+        minSdkVersion 21
         targetSdkVersion 27
         versionName "0.1"
         versionCode 1
-
-        vectorDrawables.useSupportLibrary = true
     }
 
     signingConfigs {
@@ -85,6 +83,7 @@ dependencies {
     //Android
     implementation "com.android.support:appcompat-v7:$android_support_library_version"
     implementation "com.android.support:recyclerview-v7:$android_support_library_version"
+    implementation "com.android.support:animated-vector-drawable:$android_support_library_version"
     implementation "com.android.support.constraint:constraint-layout:1.1.0-beta6"
 
     //Circle indicator
