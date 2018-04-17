@@ -70,7 +70,7 @@ android {
 }
 
 androidExtensions {
-    experimental = true // For Kotlin's @Parcelize
+    experimental = true // For Kotlin's @Parcelize and Coroutines
 }
 
 dependencies {
@@ -79,12 +79,15 @@ dependencies {
 
     //Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:0.21"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:0.20"
 
     //Android
     implementation "com.android.support:appcompat-v7:$android_support_library_version"
     implementation "com.android.support:recyclerview-v7:$android_support_library_version"
     implementation "com.android.support:animated-vector-drawable:$android_support_library_version"
     implementation "com.android.support.constraint:constraint-layout:1.1.0-beta6"
+
 
     //Circle indicator
     implementation "me.relex:circleindicator:1.2.2"
