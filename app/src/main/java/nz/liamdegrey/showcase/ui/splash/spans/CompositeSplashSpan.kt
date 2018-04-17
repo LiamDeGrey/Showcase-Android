@@ -1,14 +1,19 @@
 package nz.liamdegrey.showcase.ui.splash.spans
 
-import android.animation.ObjectAnimator
+import android.animation.ValueAnimator
 import android.graphics.BlurMaskFilter
 import android.text.TextPaint
 import android.text.style.CharacterStyle
-import android.util.Property
 import kotlin.math.abs
 import kotlin.math.max
 
 class CompositeSplashSpan : CharacterStyle() {
+    private val percentageCompleteUpdateListener by lazy {
+        ValueAnimator.AnimatorUpdateListener {
+            percentageComplete = it.animatedValue as Float
+        }
+    }
+
     private var percentageComplete: Float = -1f
     private val percentageCompleteInverted: Float
         get() = 1 - abs(percentageComplete)
@@ -20,24 +25,16 @@ class CompositeSplashSpan : CharacterStyle() {
     private val translationY: Int
         get() = (MAXIMUM_TRANSLATION_Y * percentageComplete).toInt()
 
-    private val percentageCompleteProperty by lazy {
-        object : Property<CompositeSplashSpan, Float>(Float::class.java, "PERCENTAGE_COMPLETE") {
-            override fun get(span: CompositeSplashSpan): Float = percentageComplete
 
-            override fun set(span: CompositeSplashSpan, value: Float) {
-                span.percentageComplete = value
+    fun getAnimateInAnimator(): ValueAnimator =
+            ValueAnimator.ofFloat(-1f, 0f).apply {
+                addUpdateListener(percentageCompleteUpdateListener)
             }
-        }
-    }
 
-
-    fun getAnimateInAnimator(): ObjectAnimator {
-        return ObjectAnimator.ofFloat(this, percentageCompleteProperty, -1f, 0f)
-    }
-
-    fun getAnimateOutAnimator(): ObjectAnimator {
-        return ObjectAnimator.ofFloat(this, percentageCompleteProperty, 0f, 1f)
-    }
+    fun getAnimateOutAnimator(): ValueAnimator =
+            ValueAnimator.ofFloat(0f, 1f).apply {
+                addUpdateListener(percentageCompleteUpdateListener)
+            }
 
     override fun updateDrawState(paint: TextPaint) {
         paint.alpha = alpha
