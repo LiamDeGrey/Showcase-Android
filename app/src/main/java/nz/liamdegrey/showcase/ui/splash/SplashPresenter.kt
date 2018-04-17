@@ -54,41 +54,33 @@ class SplashPresenter(animationText: CharSequence) : BasePresenter<SplashViewMas
                 val animateInAnimators = ArrayList<Animator>()
                 val animateOutAnimators = ArrayList<Animator>()
 
-                animationText.forEachIndexed { index, character ->
-                    character.takeUnless { it.isWhitespace() }
-                            ?.run {
-                                val compositeSplashSpan = CompositeSplashSpan()
+                var animateInDuration = 0L
+                animationText.removeWhitespace()
+                        .also { animateInDuration = it.lastIndex * SUBSEQUENT_LETTER_ANIMATION_DELAY + LETTER_ANIMATION_DURATION }
+                        .forEachIndexed { index, _ ->
+                            val compositeSplashSpan = CompositeSplashSpan()
 
-                                animationText.setSpan(compositeSplashSpan, index, index + 1, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
+                            animationText.setSpan(compositeSplashSpan, index, index + 1, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
 
-                                animateInAnimators.add(compositeSplashSpan.getAnimateInAnimator().apply {
-                                    interpolator = DecelerateInterpolator()
-                                    duration = LETTER_ANIMATION_DURATION
-                                    startDelay = index * SUBSEQUENT_LETTER_ANIMATION_DELAY
-                                    addUpdateListener(updateListener)
-                                })
+                            animateInAnimators.add(compositeSplashSpan.getAnimateInAnimator().apply {
+                                interpolator = DecelerateInterpolator()
+                                duration = LETTER_ANIMATION_DURATION
+                                startDelay = index * SUBSEQUENT_LETTER_ANIMATION_DELAY
+                                addUpdateListener(updateListener)
+                            })
 
-                                val invertedIndex = animationText.lastIndex - index
+                            val invertedIndex = animationText.lastIndex - index
 
-                                animateOutAnimators.add(compositeSplashSpan.getAnimateOutAnimator().apply {
-                                    interpolator = AccelerateInterpolator()
-                                    duration = LETTER_ANIMATION_DURATION
-                                    startDelay = invertedIndex * SUBSEQUENT_LETTER_ANIMATION_DELAY
-                                    addUpdateListener(updateListener)
-                                })
-                            }
-                }
+                            animateOutAnimators.add(compositeSplashSpan.getAnimateOutAnimator().apply {
+                                interpolator = AccelerateInterpolator()
+                                duration = LETTER_ANIMATION_DURATION
+                                startDelay = animateInDuration + ANIMATE_OUT_DELAY + invertedIndex * SUBSEQUENT_LETTER_ANIMATION_DELAY
+                                addUpdateListener(updateListener)
+                            })
+                        }
 
-                val animateInAnimatorSet = AnimatorSet().apply {
-                    playTogether(animateInAnimators)
-                    startDelay = ANIMATE_IN_DELAY
-                }
-                val animateOutAnimatorSet = AnimatorSet().apply {
-                    playTogether(animateOutAnimators)
-                    startDelay = ANIMATE_OUT_DELAY
-                }
-
-                playSequentially(animateInAnimatorSet, animateOutAnimatorSet)
+                playTogether(animateInAnimators + animateOutAnimators)
+                startDelay = ANIMATE_IN_DELAY
 
                 addListener(object : BasicAnimatorListener() {
                     override fun onAnimationEnd(animation: Animator?) {
@@ -107,6 +99,8 @@ class SplashPresenter(animationText: CharSequence) : BasePresenter<SplashViewMas
             } else {
                 null
             }
+
+    private fun SpannableString.removeWhitespace(): String = this.toString().filter { !it.isWhitespace() }
 
 //endregion
 
