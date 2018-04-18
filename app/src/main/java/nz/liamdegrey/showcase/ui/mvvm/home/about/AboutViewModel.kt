@@ -44,7 +44,7 @@ class AboutViewModel : BaseViewModel() {
     }
 
     private fun sendEmailToAddress(address: String) {
-        sendEmailToAddress.value = address//TODO: Not sent every time the user updates
+        sendEmailToAddress.value = address
     }
 
     //endregion

@@ -4,7 +4,7 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
+import android.text.method.LinkMovementMethod
 import android.view.View
 import kotlinx.android.synthetic.main.fragment_about.*
 import nz.liamdegrey.showcase.R
@@ -17,11 +17,12 @@ class AboutFragment : BaseFragment() {
 
 
     override fun viewCreated(view: View, savedInstanceState: Bundle?) {
+        about_messageView.movementMethod = LinkMovementMethod.getInstance()
+
         viewModel.aboutMessage.observe(this, Observer {
             updateAboutMessage(it)
         })
         viewModel.sendEmailToAddress.observe(this, Observer {
-            Log.v("debug", "SEND EMAIL = $it")
             sendEmail(it)
         })
 
