@@ -7,16 +7,17 @@ import com.jakewharton.rxbinding2.widget.RxTextView
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.fragment_search.*
 import nz.liamdegrey.showcase.R
-import nz.liamdegrey.showcase.ui.shared.common.views.Toolbar
 import nz.liamdegrey.showcase.ui.mvvm.common.BaseFragment
-import nz.liamdegrey.showcase.ui.mvp.home.search.adapters.SearchAdapter
+import nz.liamdegrey.showcase.ui.shared.common.views.Toolbar
+import nz.liamdegrey.showcase.ui.shared.home.search.adapters.SearchAdapter
 import java.util.concurrent.TimeUnit
 
 class SearchFragment : BaseFragment() {
-    private val searchAdapter by lazy { SearchAdapter() }
-
     override val viewModel by lazy { ViewModelProviders.of(this).get(SearchViewModel::class.java) }
     override val layoutResId = R.layout.fragment_search
+
+
+    private val searchAdapter by lazy { SearchAdapter() }
 
 
     override fun viewCreated(view: View, savedInstanceState: Bundle?) {

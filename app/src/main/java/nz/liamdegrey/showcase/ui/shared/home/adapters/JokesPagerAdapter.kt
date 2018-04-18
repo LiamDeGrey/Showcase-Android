@@ -1,11 +1,11 @@
-package nz.liamdegrey.showcase.ui.mvp.home.adapters
+package nz.liamdegrey.showcase.ui.shared.home.adapters
 
 import android.support.v4.view.PagerAdapter
 import android.support.v4.view.ViewPager
 import android.view.View
 import android.view.ViewGroup
 import nz.liamdegrey.showcase.models.Joke
-import nz.liamdegrey.showcase.ui.mvp.home.views.JokePageView
+import nz.liamdegrey.showcase.ui.shared.home.views.JokePageView
 import kotlin.math.absoluteValue
 import kotlin.math.min
 

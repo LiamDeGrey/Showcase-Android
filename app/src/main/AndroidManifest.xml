@@ -41,7 +41,13 @@
 
         <activity
             android:name=".ui.mvvm.splash.SplashActivity"
+            android:noHistory="true"
             android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".ui.mvvm.home.HomeActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan"/>
 
     </application>
 

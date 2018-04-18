@@ -1,4 +1,4 @@
-package nz.liamdegrey.showcase.ui.mvp.home.views
+package nz.liamdegrey.showcase.ui.shared.home.views
 
 import android.content.Context
 import android.support.v4.content.ContextCompat

@@ -1,5 +1,6 @@
-package nz.liamdegrey.showcase.ui.mvp.home
+package nz.liamdegrey.showcase.ui.mvvm.home
 
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v4.widget.DrawerLayout
@@ -9,14 +10,18 @@ import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_home.*
 import nz.liamdegrey.showcase.R
 import nz.liamdegrey.showcase.models.Joke
-import nz.liamdegrey.showcase.ui.mvp.common.BaseActivity
+import nz.liamdegrey.showcase.ui.mvvm.common.BaseActivity
+import nz.liamdegrey.showcase.ui.mvvm.home.about.AboutFragment
+import nz.liamdegrey.showcase.ui.mvvm.home.acknowledgements.AcknowledgementsFragment
+import nz.liamdegrey.showcase.ui.mvvm.home.search.SearchFragment
+import nz.liamdegrey.showcase.ui.mvvm.splash.SplashActivity
 import nz.liamdegrey.showcase.ui.shared.common.views.Toolbar
 import nz.liamdegrey.showcase.ui.shared.home.adapters.JokesPagerAdapter
 import nz.liamdegrey.showcase.ui.shared.home.views.DrawerView
-import nz.liamdegrey.showcase.ui.mvp.splash.SplashActivity
 
-class HomeActivity : BaseActivity<HomePresenter, HomeViewMask>(),
-        HomeViewMask, DrawerView.Callbacks {
+class HomeActivity : BaseActivity(), DrawerView.Callbacks {
+    override val viewModel by lazy { ViewModelProviders.of(this).get(HomeViewModel::class.java) }
+
     private val jokesPagerAdapter by lazy { JokesPagerAdapter() }
 
 
@@ -56,7 +61,7 @@ class HomeActivity : BaseActivity<HomePresenter, HomeViewMask>(),
     }
 
     override fun onExtraClicked() {
-        presenter?.onExtraClicked()
+        showFragment(SearchFragment())
     }
 
     override fun consumeBackPress() {
@@ -68,20 +73,18 @@ class HomeActivity : BaseActivity<HomePresenter, HomeViewMask>(),
         super.consumeBackPress()
     }
 
-    override fun createPresenter(): HomePresenter = HomePresenter()
-
     //region: Drawer methods
 
     override fun onAboutClicked() {
-        presenter?.onAboutClicked()
+        showFragment(AboutFragment())
     }
 
     override fun onAcknowledgementsClicked() {
-        presenter?.onAcknowledgementsClicked()
+        showFragment(AcknowledgementsFragment())
     }
 
     override fun onLikedTheSplashClicked() {
-        presenter?.onLikedTheSplashClicked()
+        startActivity(SplashActivity::class.java)
     }
 
     override fun closeDrawer() {
@@ -92,19 +95,15 @@ class HomeActivity : BaseActivity<HomePresenter, HomeViewMask>(),
 
     //region: Private methods
 
-    //endregion
-
-    //region: ViewMask methods
-
-    override fun showWelcomeMessage() {
+    fun showWelcomeMessage() {
         Toast.makeText(this, R.string.home_welcomeMessage, Toast.LENGTH_LONG).show()
     }
 
-    override fun showNoContentView(show: Boolean) {
+    fun showNoContentView(show: Boolean) {
         home_noContentView.visibility = if (show) View.VISIBLE else View.GONE
     }
 
-    override fun populateJokes(jokes: List<Joke>) {
+    fun populateJokes(jokes: List<Joke>) {
         jokesPagerAdapter.populateJokes(jokes)
         home_jokesPager_indicator.setViewPager(home_jokesPager)
         home_jokesPager.offscreenPageLimit = jokesPagerAdapter.count - 1
@@ -112,7 +111,7 @@ class HomeActivity : BaseActivity<HomePresenter, HomeViewMask>(),
         home_jokesPager.setCurrentItem(0, true)
     }
 
-    override fun goToSplashActivity() {
+    fun showSplashActivity() {
         startActivity(SplashActivity::class.java)
     }
 

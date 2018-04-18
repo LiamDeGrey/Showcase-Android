@@ -1,4 +1,4 @@
-package nz.liamdegrey.showcase.ui.mvp.home.search.views
+package nz.liamdegrey.showcase.ui.shared.home.search.views
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView

@@ -9,7 +9,7 @@ import nz.liamdegrey.showcase.R
 import nz.liamdegrey.showcase.models.Joke
 import nz.liamdegrey.showcase.ui.mvp.common.BaseFragment
 import nz.liamdegrey.showcase.ui.shared.common.views.Toolbar
-import nz.liamdegrey.showcase.ui.mvp.home.search.adapters.SearchAdapter
+import nz.liamdegrey.showcase.ui.shared.home.search.adapters.SearchAdapter
 
 
 class SearchFragment : BaseFragment<SearchPresenter, SearchViewMask>(),

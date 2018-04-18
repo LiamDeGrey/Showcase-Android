@@ -134,6 +134,13 @@ abstract class BaseActivity : AppCompatActivity(), Toolbar.Callbacks {
         subscriptions?.add(subscription)
     }
 
+    protected open fun setLoading(loading: Boolean) {
+        findViewById<LoadingView>(R.id.loadingView)?.let { loadingView ->
+            isLoading = loading
+            loadingView.loading = loading
+        }
+    }
+
     protected fun closeFragment() {
         supportFragmentManager.popBackStackImmediate()
     }
@@ -141,13 +148,6 @@ abstract class BaseActivity : AppCompatActivity(), Toolbar.Callbacks {
     //endregion
 
     //region: Private methods
-
-    private fun setLoading(loading: Boolean) {
-        findViewById<LoadingView>(R.id.loadingView)?.let { loadingView ->
-            isLoading = loading
-            loadingView.loading = loading
-        }
-    }
 
     //endregion
 

@@ -8,6 +8,7 @@ import android.view.View
 import kotlinx.android.synthetic.main.activity_splash.*
 import nz.liamdegrey.showcase.R
 import nz.liamdegrey.showcase.ui.mvvm.common.BaseActivity
+import nz.liamdegrey.showcase.ui.mvvm.home.HomeActivity
 
 class SplashActivity : BaseActivity() {
     override val viewModel by lazy {
@@ -52,7 +53,7 @@ class SplashActivity : BaseActivity() {
 
     private fun showHomeActivity(show: Boolean?) {
         if (show == true) {
-//            startActivity()
+            startActivity(HomeActivity::class.java)
         }
     }
 

@@ -47,7 +47,6 @@ class SplashViewModel : BaseViewModel() {
     fun stopAnimation() {
         animationTextAnimator.getCompletedOrNull()?.cancel()
     }
-
     //endregion
 
     //region: Private methods

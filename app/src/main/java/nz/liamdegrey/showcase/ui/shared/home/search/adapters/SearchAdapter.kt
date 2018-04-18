@@ -1,9 +1,9 @@
-package nz.liamdegrey.showcase.ui.mvp.home.search.adapters
+package nz.liamdegrey.showcase.ui.shared.home.search.adapters
 
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import nz.liamdegrey.showcase.models.Joke
-import nz.liamdegrey.showcase.ui.mvp.home.search.views.JokeView
+import nz.liamdegrey.showcase.ui.shared.home.search.views.JokeView
 import java.util.*
 
 class SearchAdapter : RecyclerView.Adapter<JokeView.Holder>() {

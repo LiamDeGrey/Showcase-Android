@@ -56,7 +56,7 @@
     </android.support.constraint.ConstraintLayout>
 
     <!-- Drawer view -->
-    <nz.liamdegrey.showcase.ui.mvp.home.views.DrawerView
+    <nz.liamdegrey.showcase.ui.shared.home.views.DrawerView
         android:id="@+id/home_drawerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
