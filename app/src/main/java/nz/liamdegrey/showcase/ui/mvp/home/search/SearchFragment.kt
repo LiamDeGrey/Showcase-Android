@@ -2,8 +2,6 @@ package nz.liamdegrey.showcase.ui.mvp.home.search
 
 import android.os.Bundle
 import android.view.View
-import android.view.View.GONE
-import android.view.View.VISIBLE
 import kotlinx.android.synthetic.main.fragment_search.*
 import nz.liamdegrey.showcase.R
 import nz.liamdegrey.showcase.models.Joke
@@ -35,15 +33,17 @@ class SearchFragment : BaseFragment<SearchPresenter, SearchViewMask>(),
     override fun createPresenter(): SearchPresenter = SearchPresenter()
 
     override fun setLoading(loading: Boolean) {
-
+        search_loadingView.loading = loading
     }
 
     //region: ViewMask methods
 
+    override fun showNoContentView(show: Boolean) {
+        search_noContent.visibility = if (show) View.VISIBLE else View.GONE
+    }
+
     override fun updateJokes(jokes: List<Joke>) {
         searchAdapter.updateJokes(jokes)
-
-        search_noContent.visibility = if (search_termInput.text.isBlank() || !jokes.isEmpty()) GONE else VISIBLE
     }
 
     //endregion

@@ -5,6 +5,8 @@ import nz.liamdegrey.showcase.ui.mvp.common.BaseViewMask
 
 interface SearchViewMask : BaseViewMask {
 
+    fun showNoContentView(show: Boolean)
+
     fun updateJokes(jokes: List<Joke>)
 
 }

@@ -31,7 +31,7 @@ class SearchPresenter : BasePresenter<SearchViewMask>() {
         subscribe(textWatcher
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ term ->
-                    searchWithTerm(term)
+                    searchForJokes(term)
                 }))
     }
 
@@ -39,21 +39,28 @@ class SearchPresenter : BasePresenter<SearchViewMask>() {
 
     //region: Private methods
 
-    private fun searchWithTerm(term: String) {
+    private fun searchForJokes(term: String) {
+        showNoContentView(false)
+
         term.takeUnless { it.isBlank() }
                 ?.let {
-                    subscribe(jokeBroker.searchForJokes(it)
+                    updateJokes(null)
+                    setLoading(true)
+
+                    jokeBroker.searchForJokes(it)
                             .subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread())
+                            .doFinally { setLoading(false) }
                             .subscribe { jokesHolder, error ->
                                 error?.let {
-                                    updateJokes(ArrayList())
+                                    showNoContentView(true)
                                 } ?: run {
+                                    showNoContentView(jokesHolder.jokes.isEmpty())
                                     updateJokes(jokesHolder.jokes)
                                 }
-                            })
+                            }
                 } ?: run {
-            updateJokes(ArrayList())
+            updateJokes(null)
         }
     }
 
@@ -61,8 +68,12 @@ class SearchPresenter : BasePresenter<SearchViewMask>() {
 
     //region: ViewMask methods
 
-    private fun updateJokes(jokes: List<Joke>) {
-        getViewMask()?.updateJokes(jokes)
+    private fun showNoContentView(show: Boolean) {
+        getViewMask()?.showNoContentView(show)
+    }
+
+    private fun updateJokes(jokes: List<Joke>?) {
+        getViewMask()?.updateJokes(jokes.orEmpty())
     }
 
     //endregion
