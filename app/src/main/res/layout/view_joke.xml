@@ -3,7 +3,7 @@
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
        xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <nz.liamdegrey.showcase.ui.home.views.CharacterImageView
+    <nz.liamdegrey.showcase.ui.mvp.home.views.CharacterImageView
         android:id="@+id/joke_numberView"
         android:layout_width="0dp"
         android:layout_height="match_parent"

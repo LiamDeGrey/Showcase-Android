@@ -6,7 +6,7 @@
     android:background="?android:attr/windowBackground"
     android:orientation="vertical">
 
-    <nz.liamdegrey.showcase.ui.common.views.Toolbar style="@style/Toolbar"/>
+    <nz.liamdegrey.showcase.ui.shared.common.views.Toolbar style="@style/Toolbar"/>
 
     <ScrollView
         android:layout_width="match_parent"

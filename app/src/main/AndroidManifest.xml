@@ -14,11 +14,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <!-- MVP activities -->
+
         <activity
-            android:name=".ui.splash.SplashActivity"
+            android:name=".ui.mvp.splash.SplashActivity"
             android:noHistory="true"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan">
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -27,9 +28,15 @@
         </activity>
 
         <activity
-            android:name=".ui.home.HomeActivity"
+            android:name=".ui.mvp.home.HomeActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan"/>
+
+        <!-- MVVM activities -->
+
+        <activity
+            android:name=".ui.mvvm.splash.SplashActivity"
+            android:screenOrientation="portrait"/>
 
     </application>
 

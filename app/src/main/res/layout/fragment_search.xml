@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="?android:attr/windowBackground">
 
-    <nz.liamdegrey.showcase.ui.common.views.Toolbar
+    <nz.liamdegrey.showcase.ui.shared.common.views.Toolbar
         android:id="@id/toolbar"
         style="@style/Toolbar"/>
 
