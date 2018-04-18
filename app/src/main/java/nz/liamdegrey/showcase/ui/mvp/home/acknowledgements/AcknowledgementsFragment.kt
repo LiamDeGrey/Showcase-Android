@@ -8,8 +8,7 @@ import nz.liamdegrey.showcase.ui.mvp.common.BaseFragment
 import nz.liamdegrey.showcase.ui.shared.common.views.Toolbar
 
 class AcknowledgementsFragment : BaseFragment<AcknowledgementsPresenter, AcknowledgementsViewMask>(), AcknowledgementsViewMask {
-    override val layoutResId: Int
-        get() = R.layout.fragment_acknowledgements
+    override val layoutResId = R.layout.fragment_acknowledgements
 
 
     override fun viewCreated(view: View, savedInstanceState: Bundle?) {

@@ -9,8 +9,7 @@ import nz.liamdegrey.showcase.ui.shared.common.views.Toolbar
 
 class AboutFragment : BaseFragment<AboutPresenter, AboutViewMask>(),
         AboutViewMask {
-    override val layoutResId: Int
-        get() = R.layout.fragment_about
+    override val layoutResId = R.layout.fragment_about
 
 
     override fun viewCreated(view: View, savedInstanceState: Bundle?) {

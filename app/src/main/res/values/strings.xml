@@ -28,7 +28,10 @@
 
     <!-- About strings -->
     <string name="about_title">About</string>
-    <string name="about_body">Showcase-Android is an incredibly simple sample of how I make Android applications.\nOn inspection of the source code you\'ll notice the project is completely based on Kotlin, and uses RxJava where observers are required (Network requests, EditText updates etc.). I use SVG drawables to replace the <i>beefier</i> PNG files. This reduces the APK size greatly, however, PNG files are still generated when using Android versions prior to API 21.\nI plan on updating this application regularly to ensure it keeps up-to-date with the latest trends and technologies.\n\nCheck back later to see how it develops!</string>
+    <string name="about_body">Showcase-Android is an incredibly simple sample of how I make Android applications.\nThis app has two separate implementations, each based on an architectural pattern of either\n<b>Model-View-Presenter</b> <small><i>AKA</i></small> <b>MVP</b>\nor\n<b>Model-View-ViewModel</b> <small><i>AKA</i></small> <b>MVVM</b>\nOn inspection of the source code you\'ll notice the project is completely based on Kotlin, and uses RxJava where observers are required (Network requests, EditText updates etc.). I use SVG drawables to replace the <i>beefier</i> PNG files. This reduces the APK size greatly.\nI plan on updating this application regularly to ensure it keeps up-to-date with the latest trends and technologies.\n\nCheck back later to see how it develops or get in touch at\nEmail: liam.degrey@gmail.com</string>
+    <string name="about_body_link">liam.degrey@gmail.com</string>
+    <string name="about_email_choose_client">Send email with:</string>
+    <string name="about_email_subject">Nice app dude!</string>
 
     <!-- Acknowledgements strings -->
     <string name="acknowledgements_title">Acknowledgements</string>
