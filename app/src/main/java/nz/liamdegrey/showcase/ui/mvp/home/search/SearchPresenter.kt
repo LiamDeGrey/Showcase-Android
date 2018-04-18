@@ -47,7 +47,7 @@ class SearchPresenter : BasePresenter<SearchViewMask>() {
                     updateJokes(null)
                     setLoading(true)
 
-                    jokeBroker.searchForJokes(it)
+                    subscribe(jokeBroker.searchForJokes(it)
                             .subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread())
                             .doFinally { setLoading(false) }
@@ -58,7 +58,7 @@ class SearchPresenter : BasePresenter<SearchViewMask>() {
                                     showNoContentView(jokesHolder.jokes.isEmpty())
                                     updateJokes(jokesHolder.jokes)
                                 }
-                            }
+                            })
                 } ?: run {
             updateJokes(null)
         }

@@ -15,20 +15,7 @@ class HomePresenter : BasePresenter<HomeViewMask>() {
 
 
     override fun onViewAttached() {
-        setLoading(true)
-
-        subscribe(jokesBroker.getRandomJokes((Math.random() * 6 + 4).toInt())//between 4 and 10
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doFinally { setLoading(false) }
-                .subscribe { jokesHolder, error ->
-                    error?.let {
-                        showNoContentView(true)
-                    } ?: run {
-                        showNoContentView(false)
-                        populateJokes(jokesHolder.jokes.shuffled())
-                    }
-                })
+        searchForJokes()
 
         if (!preferences.hasViewedHomeActivity) {
             showWelcomeMessage()
@@ -40,6 +27,22 @@ class HomePresenter : BasePresenter<HomeViewMask>() {
     }
 
     //region: Presenter methods
+
+    fun searchForJokes() {
+        setLoading(true)
+
+        subscribe(jokesBroker.getRandomJokes((Math.random() * 6 + 4).toInt())//between 4 and 10
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doFinally { setLoading(false) }
+                .subscribe { jokesHolder, error ->
+                    error?.let {
+                        updateJokes(null)
+                    } ?: run {
+                        updateJokes(jokesHolder.jokes.shuffled())
+                    }
+                })
+    }
 
     fun onExtraClicked() {
         showFragment(SearchFragment())
@@ -59,22 +62,14 @@ class HomePresenter : BasePresenter<HomeViewMask>() {
 
     //endregion
 
-    //region: Private methods
-
-    //endregion
-
     //region: ViewMask methods
 
     private fun showWelcomeMessage() {
         getViewMask()?.showWelcomeMessage()
     }
 
-    private fun showNoContentView(show: Boolean) {
-        getViewMask()?.showNoContentView(show)
-    }
-
-    private fun populateJokes(jokes: List<Joke>) {
-        getViewMask()?.populateJokes(jokes)
+    private fun updateJokes(jokes: List<Joke>?) {
+        getViewMask()?.updateJokes(jokes.orEmpty())
     }
 
     private fun goToSplashActivity() {

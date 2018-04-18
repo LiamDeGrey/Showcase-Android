@@ -10,13 +10,13 @@ import kotlinx.android.synthetic.main.activity_home.*
 import nz.liamdegrey.showcase.R
 import nz.liamdegrey.showcase.models.Joke
 import nz.liamdegrey.showcase.ui.mvp.common.BaseActivity
+import nz.liamdegrey.showcase.ui.mvp.splash.SplashActivity
 import nz.liamdegrey.showcase.ui.shared.common.views.Toolbar
 import nz.liamdegrey.showcase.ui.shared.home.adapters.JokesPagerAdapter
 import nz.liamdegrey.showcase.ui.shared.home.views.DrawerView
-import nz.liamdegrey.showcase.ui.mvp.splash.SplashActivity
 
 class HomeActivity : BaseActivity<HomePresenter, HomeViewMask>(),
-        HomeViewMask, DrawerView.Callbacks {
+        HomeViewMask, DrawerView.Callbacks, View.OnClickListener {
     private val jokesPagerAdapter by lazy { JokesPagerAdapter() }
 
 
@@ -31,6 +31,8 @@ class HomeActivity : BaseActivity<HomePresenter, HomeViewMask>(),
         home_jokesPager.pageMargin = resources.getDimensionPixelSize(R.dimen.padding_16)
         home_jokesPager.setPageTransformer(false, jokesPagerAdapter, View.LAYER_TYPE_HARDWARE)
         home_jokesPager.adapter = jokesPagerAdapter
+
+        home_noContentView.setOnClickListener(this)
     }
 
     override fun initToolbar(toolbar: Toolbar) {
@@ -48,6 +50,12 @@ class HomeActivity : BaseActivity<HomePresenter, HomeViewMask>(),
             home_drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
         } else {
             home_drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+        }
+    }
+
+    override fun onClick(view: View) {
+        when (view.id) {
+            R.id.home_noContentView -> presenter?.searchForJokes()
         }
     }
 
@@ -100,16 +108,14 @@ class HomeActivity : BaseActivity<HomePresenter, HomeViewMask>(),
         Toast.makeText(this, R.string.home_welcomeMessage, Toast.LENGTH_LONG).show()
     }
 
-    override fun showNoContentView(show: Boolean) {
-        home_noContentView.visibility = if (show) View.VISIBLE else View.GONE
-    }
-
-    override fun populateJokes(jokes: List<Joke>) {
+    override fun updateJokes(jokes: List<Joke>) {
         jokesPagerAdapter.populateJokes(jokes)
         home_jokesPager_indicator.setViewPager(home_jokesPager)
         home_jokesPager.offscreenPageLimit = jokesPagerAdapter.count - 1
         home_jokesPager.setCurrentItem(jokes.lastIndex, false)
         home_jokesPager.setCurrentItem(0, true)
+
+        home_noContentView.visibility = if (jokes.isEmpty()) View.VISIBLE else View.GONE
     }
 
     override fun goToSplashActivity() {

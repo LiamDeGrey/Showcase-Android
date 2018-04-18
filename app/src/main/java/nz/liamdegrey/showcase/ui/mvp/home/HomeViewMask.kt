@@ -7,9 +7,7 @@ interface HomeViewMask : BaseViewMask {
 
     fun showWelcomeMessage()
 
-    fun showNoContentView(show: Boolean)
-
-    fun populateJokes(jokes: List<Joke>)
+    fun updateJokes(jokes: List<Joke>)
 
     fun goToSplashActivity()
 
