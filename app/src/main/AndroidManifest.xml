@@ -14,10 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <!-- MVP activities -->
-
         <activity
-            android:name=".ui.mvp.splash.SplashActivity"
+            android:name="nz.liamdegrey.showcase.ui.shared.launch.LaunchActivity"
             android:noHistory="true"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -26,6 +24,13 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+        <!-- MVP activities -->
+
+        <activity
+            android:name=".ui.mvp.splash.SplashActivity"
+            android:noHistory="true"
+            android:screenOrientation="portrait"/>
 
         <activity
             android:name=".ui.mvp.home.HomeActivity"

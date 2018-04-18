@@ -11,6 +11,11 @@
     <string name="toolbar_home_contentDescription">Home</string>
     <string name="toolbar_extra_contentDescription">Extra</string>
 
+    <!-- Launch strings -->
+    <string name="launch_description">This application has been created twice using two different architecture patterns:\n\u2022 <b>Model-View-Presenter</b> <small><i>AKA</i></small> <b>MVP</b>\n\u2022 <b>Model-View-ViewModel</b> <small><i>AKA</i></small> <b>MVVM</b>\n\nBoth paths show the same application, just implemented in different ways.</string>
+    <string name="launch_mvpButton">MVP</string>
+    <string name="launch_mvvmButton">MVVM</string>
+
     <!-- Home strings -->
     <string name="home_title">Home</string>
     <string name="home_noContent">Sorry, but we couldn\'t seem to load any great jokes for you! Come back later and try again.</string>

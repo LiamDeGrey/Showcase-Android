@@ -104,9 +104,9 @@ abstract class BaseActivity<Presenter : BasePresenter<ViewMask>, ViewMask : Base
     protected open fun consumeActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {}
 
     protected fun startActivity(activityClass: Class<out BaseActivity<*, *>>) {
-        val intent = Intent(this, activityClass)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        startActivity(intent)
+        startActivity(Intent(this, activityClass).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        })
     }
 
     protected abstract fun createPresenter(): Presenter

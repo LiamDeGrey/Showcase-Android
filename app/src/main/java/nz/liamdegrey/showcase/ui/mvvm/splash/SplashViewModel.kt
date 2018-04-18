@@ -2,6 +2,7 @@ package nz.liamdegrey.showcase.ui.mvvm.splash
 
 import android.animation.Animator
 import android.animation.AnimatorSet
+import android.animation.ValueAnimator
 import android.arch.lifecycle.MutableLiveData
 import android.text.SpannableString
 import android.text.Spanned
@@ -29,8 +30,11 @@ class SplashViewModel : BaseViewModel() {
     //Public methods
 
     fun createAnimation(animationText: String) {
+        animationTextSpan.value = SpannableString(animationText)
         animationTextAnimator = async {
-            createAnimationTextAnimator(animationText)
+            createAnimationTextAnimator(animationText, ValueAnimator.AnimatorUpdateListener {
+                animationTextSpan.value = animationTextSpan.value//TODO: Is there a better way of updating this?
+            })
         }
     }
 
@@ -49,10 +53,8 @@ class SplashViewModel : BaseViewModel() {
     //region: Private methods
 
     //FIXME: too much work being done on main thread during animation
-    private fun createAnimationTextAnimator(animationText: String): AnimatorSet =
+    private fun createAnimationTextAnimator(animationText: String, updateListener: ValueAnimator.AnimatorUpdateListener): AnimatorSet =
             AnimatorSet().apply {
-                animationTextSpan.value = SpannableString(animationText)
-
                 val animateInAnimators = ArrayList<Animator>()
                 val animateOutAnimators = ArrayList<Animator>()
 
@@ -68,6 +70,7 @@ class SplashViewModel : BaseViewModel() {
                                 interpolator = DecelerateInterpolator()
                                 duration = LETTER_ANIMATION_DURATION
                                 startDelay = index * SUBSEQUENT_LETTER_ANIMATION_DELAY
+                                addUpdateListener(updateListener)
                             })
 
                             val invertedIndex = animationText.lastIndex - index
@@ -76,6 +79,7 @@ class SplashViewModel : BaseViewModel() {
                                 interpolator = AccelerateInterpolator()
                                 duration = LETTER_ANIMATION_DURATION
                                 startDelay = animateInDuration + ANIMATE_OUT_DELAY + invertedIndex * SUBSEQUENT_LETTER_ANIMATION_DELAY
+                                addUpdateListener(updateListener)
                             })
                         }
 

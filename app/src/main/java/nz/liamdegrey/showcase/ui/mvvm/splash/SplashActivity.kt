@@ -10,8 +10,10 @@ import nz.liamdegrey.showcase.R
 import nz.liamdegrey.showcase.ui.mvvm.common.BaseActivity
 
 class SplashActivity : BaseActivity() {
-    override val viewModel = ViewModelProviders.of(this).get(SplashViewModel::class.java)
-            .apply { createAnimation(getString(R.string.app_name)) }
+    override val viewModel by lazy {
+        ViewModelProviders.of(this).get(SplashViewModel::class.java)
+                .apply { createAnimation(getString(R.string.app_name)) }
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
