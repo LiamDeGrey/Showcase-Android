@@ -14,19 +14,18 @@ class SearchViewModel : BaseViewModel() {
 
 
     init {
-        isLoading.value = false
         jokes.value = null
     }
 
     fun searchForJokes(term: String) {
         term.takeUnless { it.isBlank() }
                 ?.let {
-                    isLoading.value = true
+                    setLoading(true)
 
                     jokeBroker.searchForJokes(it)
                             .subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread())
-                            .doFinally { isLoading.value = false }
+                            .doFinally { setLoading(false) }
                             .subscribe { jokesHolder, error ->
                                 error?.let {
                                     jokes.value = null

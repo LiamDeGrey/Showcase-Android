@@ -18,7 +18,7 @@
 
     <!-- Home strings -->
     <string name="home_title">Home</string>
-    <string name="home_noContent">Sorry, but we couldn\'t seem to load any great jokes for you! Come back later and try again.</string>
+    <string name="home_noContent">Sorry, but we couldn\'t seem to load any great jokes for you! Click here to refresh.</string>
     <string name="home_welcomeMessage">Welcome to the Joke center!</string>
 
     <!-- Drawer strings -->

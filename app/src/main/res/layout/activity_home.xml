@@ -41,6 +41,8 @@
             style="@style/Text.Body1.Error"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:drawablePadding="@dimen/padding_16"
+            android:drawableTop="@drawable/ic_refresh"
             android:gravity="center"
             android:paddingLeft="@dimen/padding_36"
             android:paddingRight="@dimen/padding_36"

@@ -17,23 +17,22 @@ import nz.liamdegrey.showcase.ui.shared.common.helpers.MainThread
 import nz.liamdegrey.showcase.ui.shared.splash.spans.CompositeSplashSpan
 
 class SplashViewModel : BaseViewModel() {
+    private lateinit var animationTextAnimator: Deferred<AnimatorSet>
+
     val showHomeActivity = MutableLiveData<Boolean>()
     val animationTextSpan = MutableLiveData<SpannableString>()
 
-    private lateinit var animationTextAnimator: Deferred<AnimatorSet>
 
     init {
-        showHomeActivity.value = false
-        animationTextSpan.value = null
+        updateAnimationTextSpan(null)
     }
 
     //Public methods
 
     fun createAnimation(animationText: String) {
-        animationTextSpan.value = SpannableString(animationText)
         animationTextAnimator = async {
             createAnimationTextAnimator(animationText, ValueAnimator.AnimatorUpdateListener {
-                animationTextSpan.value = animationTextSpan.value//TODO: Is there a better way of updating this?
+                updateAnimationTextSpan(animationTextSpan.value)//TODO: Is there a better way of updating this?
             })
         }
     }
@@ -54,6 +53,7 @@ class SplashViewModel : BaseViewModel() {
     //FIXME: too much work being done on main thread during animation
     private fun createAnimationTextAnimator(animationText: String, updateListener: ValueAnimator.AnimatorUpdateListener): AnimatorSet =
             AnimatorSet().apply {
+                val tempAnimationTextSpan = SpannableString(animationText)
                 val animateInAnimators = ArrayList<Animator>()
                 val animateOutAnimators = ArrayList<Animator>()
 
@@ -62,8 +62,7 @@ class SplashViewModel : BaseViewModel() {
                         .also { animateInDuration = it.lastIndex * SUBSEQUENT_LETTER_ANIMATION_DELAY + LETTER_ANIMATION_DURATION }
                         .forEachIndexed { index, _ ->
                             val compositeSplashSpan = CompositeSplashSpan()
-
-                            animationTextSpan.value?.setSpan(compositeSplashSpan, index, index + 1, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
+                            tempAnimationTextSpan.setSpan(compositeSplashSpan, index, index + 1, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
 
                             animateInAnimators.add(compositeSplashSpan.getAnimateInAnimator().apply {
                                 interpolator = DecelerateInterpolator()
@@ -89,9 +88,13 @@ class SplashViewModel : BaseViewModel() {
                     override fun onAnimationEnd(animation: Animator?) {
                         super.onAnimationEnd(animation)
 
-                        showHomeActivity.value = true
+                        showHomeActivity()
                     }
                 })
+
+                launch(MainThread) {
+                    updateAnimationTextSpan(tempAnimationTextSpan)
+                }
             }
 
     private fun <T> Deferred<T>.getCompletedOrNull(): T? =
@@ -105,7 +108,19 @@ class SplashViewModel : BaseViewModel() {
 
     private fun String.removeWhitespace(): String = filter { !it.isWhitespace() }
 
-//endregion
+    //endregion
+
+    //region: View methods
+
+    private fun showHomeActivity() {
+        showHomeActivity.value = true
+    }
+
+    private fun updateAnimationTextSpan(animationTextSpan: SpannableString?) {
+        this.animationTextSpan.value = animationTextSpan
+    }
+
+    //endregion
 
     companion object {
         private const val LETTER_ANIMATION_DURATION = 200L

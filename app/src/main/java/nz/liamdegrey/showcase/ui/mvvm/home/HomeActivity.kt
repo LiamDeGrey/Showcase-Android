@@ -1,5 +1,6 @@
 package nz.liamdegrey.showcase.ui.mvvm.home
 
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
@@ -19,7 +20,7 @@ import nz.liamdegrey.showcase.ui.shared.common.views.Toolbar
 import nz.liamdegrey.showcase.ui.shared.home.adapters.JokesPagerAdapter
 import nz.liamdegrey.showcase.ui.shared.home.views.DrawerView
 
-class HomeActivity : BaseActivity(), DrawerView.Callbacks {
+class HomeActivity : BaseActivity(), DrawerView.Callbacks, View.OnClickListener {
     override val viewModel by lazy { ViewModelProviders.of(this).get(HomeViewModel::class.java) }
 
     private val jokesPagerAdapter by lazy { JokesPagerAdapter() }
@@ -36,6 +37,18 @@ class HomeActivity : BaseActivity(), DrawerView.Callbacks {
         home_jokesPager.pageMargin = resources.getDimensionPixelSize(R.dimen.padding_16)
         home_jokesPager.setPageTransformer(false, jokesPagerAdapter, View.LAYER_TYPE_HARDWARE)
         home_jokesPager.adapter = jokesPagerAdapter
+
+        home_noContentView.setOnClickListener(this)
+
+        viewModel.showWelcomeMessage.observe(this, Observer {
+            if (it == true) {
+                showWelcomeMessage()
+            }
+        })
+
+        viewModel.jokes.observe(this, Observer {
+            updateJokes(it.orEmpty())
+        })
     }
 
     override fun initToolbar(toolbar: Toolbar) {
@@ -53,6 +66,12 @@ class HomeActivity : BaseActivity(), DrawerView.Callbacks {
             home_drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
         } else {
             home_drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+        }
+    }
+
+    override fun onClick(view: View) {
+        when (view.id) {
+            R.id.home_noContentView -> viewModel.searchForJokes()
         }
     }
 
@@ -95,24 +114,18 @@ class HomeActivity : BaseActivity(), DrawerView.Callbacks {
 
     //region: Private methods
 
-    fun showWelcomeMessage() {
+    private fun showWelcomeMessage() {
         Toast.makeText(this, R.string.home_welcomeMessage, Toast.LENGTH_LONG).show()
     }
 
-    fun showNoContentView(show: Boolean) {
-        home_noContentView.visibility = if (show) View.VISIBLE else View.GONE
-    }
-
-    fun populateJokes(jokes: List<Joke>) {
+    private fun updateJokes(jokes: List<Joke>) {
         jokesPagerAdapter.populateJokes(jokes)
         home_jokesPager_indicator.setViewPager(home_jokesPager)
         home_jokesPager.offscreenPageLimit = jokesPagerAdapter.count - 1
         home_jokesPager.setCurrentItem(jokes.lastIndex, false)
-        home_jokesPager.setCurrentItem(0, true)
-    }
+        home_jokesPager.setCurrentItem(0, true)//Performs scroll animation on initialisation
 
-    fun showSplashActivity() {
-        startActivity(SplashActivity::class.java)
+        home_noContentView.visibility = if (jokes.isEmpty()) View.VISIBLE else View.GONE
     }
 
     //endregion

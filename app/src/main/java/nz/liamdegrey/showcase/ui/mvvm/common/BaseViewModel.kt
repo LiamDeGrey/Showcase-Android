@@ -9,6 +9,14 @@ abstract class BaseViewModel : ViewModel() {
 
 
     init {
-        isLoading.value = false
+        setLoading(false)
     }
+
+    //region: View methods
+
+    protected fun setLoading(loading: Boolean) {
+        isLoading.value = loading
+    }
+
+    //endregion
 }
