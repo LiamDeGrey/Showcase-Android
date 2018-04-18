@@ -16,8 +16,7 @@ class SearchFragment : BaseFragment<SearchPresenter, SearchViewMask>(),
         SearchViewMask {
     private val searchAdapter by lazy { SearchAdapter() }
 
-    override val layoutResId: Int
-        get() = R.layout.fragment_search
+    override val layoutResId = R.layout.fragment_search
 
 
     override fun viewCreated(view: View, savedInstanceState: Bundle?) {
@@ -35,9 +34,9 @@ class SearchFragment : BaseFragment<SearchPresenter, SearchViewMask>(),
 
     override fun createPresenter(): SearchPresenter = SearchPresenter()
 
-    //region: Private methods
+    override fun setLoading(loading: Boolean) {
 
-    //endregion
+    }
 
     //region: ViewMask methods
 

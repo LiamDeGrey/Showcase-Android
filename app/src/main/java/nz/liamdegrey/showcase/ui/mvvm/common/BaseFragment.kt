@@ -92,6 +92,13 @@ abstract class BaseFragment : Fragment(), Toolbar.Callbacks {
 
     //region: Protected methods
 
+    protected open fun setLoading(loading: Boolean) {
+        view?.findViewById<LoadingView>(R.id.loadingView)?.let { loadingView ->
+            isLoading = loading
+            loadingView.loading = loading
+        }
+    }
+
     protected fun subscribe(subscription: Disposable) {
         if (subscriptions == null) {
             subscriptions = ArrayList()
@@ -106,17 +113,6 @@ abstract class BaseFragment : Fragment(), Toolbar.Callbacks {
 
     protected fun closeFragment() {
         fragmentManager?.popBackStackImmediate()
-    }
-
-    //endregion
-
-    //region: Private methods
-
-    private fun setLoading(loading: Boolean) {
-        view?.findViewById<LoadingView>(R.id.loadingView)?.let { loadingView ->
-            isLoading = loading
-            loadingView.loading = loading
-        }
     }
 
     //endregion

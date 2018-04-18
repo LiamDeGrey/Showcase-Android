@@ -23,10 +23,6 @@ class SplashViewModel : BaseViewModel() {
     val animationTextSpan = MutableLiveData<SpannableString>()
 
 
-    init {
-        updateAnimationTextSpan(null)
-    }
-
     //Public methods
 
     fun createAnimation(animationText: String) {

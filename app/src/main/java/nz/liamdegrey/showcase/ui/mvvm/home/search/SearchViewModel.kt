@@ -10,16 +10,18 @@ import nz.liamdegrey.showcase.ui.mvvm.common.BaseViewModel
 class SearchViewModel : BaseViewModel() {
     private val jokeBroker by lazy { Application.instance.jokeBroker }
 
+    val showNoContentView = MutableLiveData<Boolean>()
     val jokes = MutableLiveData<List<Joke>>()
 
 
-    init {
-        jokes.value = null
-    }
+    //region: Public methods
 
     fun searchForJokes(term: String) {
+        showNoContentView(false)
+
         term.takeUnless { it.isBlank() }
                 ?.let {
+                    updateJokes(null)
                     setLoading(true)
 
                     jokeBroker.searchForJokes(it)
@@ -28,13 +30,28 @@ class SearchViewModel : BaseViewModel() {
                             .doFinally { setLoading(false) }
                             .subscribe { jokesHolder, error ->
                                 error?.let {
-                                    jokes.value = null
+                                    showNoContentView(true)
                                 } ?: run {
-                                    jokes.value = jokesHolder.jokes
+                                    showNoContentView(jokesHolder.jokes.isEmpty())
+                                    updateJokes(jokesHolder.jokes)
                                 }
                             }
                 } ?: run {
-            jokes.value = null
+            updateJokes(null)
         }
     }
+
+    //endregion
+
+    //region: View methods
+
+    private fun showNoContentView(show: Boolean) {
+        showNoContentView.value = show
+    }
+
+    private fun updateJokes(jokes: List<Joke>?) {
+        this.jokes.value = jokes
+    }
+
+    //endregion
 }

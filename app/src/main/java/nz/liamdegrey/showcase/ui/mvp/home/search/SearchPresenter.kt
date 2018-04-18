@@ -24,9 +24,9 @@ class SearchPresenter : BasePresenter<SearchViewMask>() {
 
     fun setupTextWatcher(textInput: EditText) {
         val textWatcher = RxTextView.textChanges(textInput)
-                .debounce(500, TimeUnit.MILLISECONDS)
-                .distinctUntilChanged()
+                .debounce(TEXT_INPUT_SEARCH_DELAY, TimeUnit.MILLISECONDS)
                 .map({ input -> input.toString() })
+                .distinctUntilChanged()
 
         subscribe(textWatcher
                 .observeOn(AndroidSchedulers.mainThread())
@@ -66,4 +66,8 @@ class SearchPresenter : BasePresenter<SearchViewMask>() {
     }
 
     //endregion
+
+    companion object {
+        private const val TEXT_INPUT_SEARCH_DELAY = 500L
+    }
 }
